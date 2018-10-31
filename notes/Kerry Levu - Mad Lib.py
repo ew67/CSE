@@ -19,7 +19,7 @@ Noun_2 = input("Ok last one, I want a noun.")
 
 
 # Print Statements for Mad_Lib
-#  Printed 1 sentence at a time.
+# Printed 1 sentence at a time.
 
 print()
 print()
@@ -31,10 +31,3 @@ print("My mom said to see if %s needs a fresh %s." % (Name_1, Noun_1))
 print("So I carried a tray of glasses full of %s into the %s room." % (Liquid_1, Verb_Ending_Ing_1))
 print("When I got there, I couldn't believe my %s!" % Plural_Body_Part)
 print("There were %s %s on the %s!" % (Plural_Noun, Verb_Ending_Ing_2, Noun_2))
-
-
-
-
-
-
-
