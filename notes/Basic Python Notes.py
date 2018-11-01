@@ -124,13 +124,29 @@ print()
 def grade_calc(percentage):
     if percentage >= 90:
         return"A"
-    elif percentage >= 80:
-        return "B"
-    elif percentage >= 70:
-        return "C"
-    elif percentage >= 60:
-        return "D"
-    else:
-        return "F"
+    # elif percentage >= 80:
+    #     return "B"
+    # elif percentage >= 70:
+    #     return "C"
+    # elif percentage >= 60:
+    #     return "D"
+    # else:
+    #     return "F"
 
-  print(grade_calc(45))
+print(grade_calc(45))
+
+#  Equality Statements
+# print( 5 > 3 )
+# print(5 >= 3)
+# print(3 == 3)
+
+'''
+a = 3 # A is set to 3 
+a == 3 # Is a equal is to 3 
+
+'''
+
+
+
+
+
