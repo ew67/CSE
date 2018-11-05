@@ -122,7 +122,7 @@ print()
 
 # Control Statements
 def grade_calc(percentage):
-    if percentage >= 90:
+        if percentage >= 90:
         return"A"
     elif percentage >= 80:
         return "B"
