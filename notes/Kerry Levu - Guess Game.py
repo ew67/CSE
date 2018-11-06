@@ -4,13 +4,10 @@ print(random_int)
 
 guesses = 0
 amount_guesses = guesses + 1
-print("What number am I thinking of?")
-guess = input()
-guess = int(guess)
 
 
 
-for i in range(5):
+for i in (1, 2, 3, 4, 5):
     print("What number am I thinking of?")
     guess = input()
     guess = int(guess)
@@ -20,10 +17,5 @@ for i in range(5):
         print("Go higher.")
     elif guess == random_int:
         print("How did you figure that out? You must've cheated.")
-        continue
-
-
-
-
 
 
