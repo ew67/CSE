@@ -39,4 +39,3 @@ print()
 
 
 print("At round %d you had $%d! You probably should've stopped right there." % (round_most_money, max_money))
-
