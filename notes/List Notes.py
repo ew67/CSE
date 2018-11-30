@@ -86,4 +86,4 @@ for character in list1:
         list1.insert(current_index, "*")
 
 # Changing lists into strings
-print("".join(list1))
+print("3".join(list1))
