@@ -146,7 +146,10 @@ a == 3 # Is A equal is to 3
 
 '''
 
+# Function Practice
+#  a**2 + b**2 = c**2
+def pythagorean(a, b):
+    (a**2 + b**2)**(1/2)
 
 
-
-
+print(pythagorean(3,4)) 
