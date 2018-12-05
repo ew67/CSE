@@ -1,5 +1,10 @@
 import math
+import time
+import datetime
+
 # Challenge 1
+
+
 def challenge1(first_name, last_name):
     print(" %s , %s" % (last_name, first_name))
 
@@ -8,14 +13,16 @@ challenge1("ghost", "delaney")
 
 
 # Challenge 2
-def challenge2(number):
-    if number % 2 == 0:
-        print("That's an even number!")
-    else:
-        print("You have an odd number.")
-
-
-challenge2(4)
+# def challenge2(digit):
+#     if digit % 2 == 0:
+#         print("That's an even number!")
+#     else:
+#         print("You have an odd number.")
+#
+#
+# # number_challenge2 = int(input("What's your number"))
+#
+# challenge2(number_challenge2)
 
 
 # Challenge 3
@@ -84,8 +91,8 @@ challenge8(555)
 
 def challenge9(letter):
     # Can look for a way to accept both lowercase and uppercase
-    vowels_list = ["A", "E", "I", "O", "U", "a", "e", "i", "o", "u"]
-    if letter in vowels_list:
+    vowels_list = ["a", "e", "i", "o", "u"]
+    if letter.lower() in vowels_list:
         print("Yes, that's a vowel.")
     else:
         print("That's not a vowel.")
@@ -94,4 +101,14 @@ def challenge9(letter):
 challenge9("A")
 
 
-def challenge10()
+def challenge10(string):
+    if string == int(string):
+        print("Your string is numeric.")
+    else:
+        print("Your string is not numeric.")
+
+
+challenge10(25)
+
+
+def challenge11():
