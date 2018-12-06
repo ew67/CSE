@@ -9,7 +9,7 @@ def challenge1(first_name, last_name):
     print(" %s , %s" % (last_name, first_name))
 
 
-challenge1("ghost", "delaney")
+challenge1("gay", "dad")
 
 
 # Challenge 2
@@ -102,13 +102,24 @@ challenge9("A")
 
 
 def challenge10(string):
-    if string == int(string):
-        print("Your string is numeric.")
-    else:
-        print("Your string is not numeric.")
+    if string == str(string):
+        print("%s is not numerical." % string)
+    elif string == int(string):
+        print("%s is numerical." % string)
 
 
-challenge10(25)
+challenge10("dog")
 
 
 def challenge11():
+    print(time.ctime())
+
+
+challenge11()
+
+
+def challenge12(x, y):
+    print(math.gcd(x, y))
+
+
+challenge12(7, 39)
