@@ -18,4 +18,6 @@ print(color_list)
 
 color_list.pop(0)
 print(color_list)
-    
+print(len(color_list))
+
+print(color_list[1])
