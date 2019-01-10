@@ -1,11 +1,18 @@
 import random
 
 random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "edison", "clovis", "black", "white",
-                            "ghosts", "hangman"]
+                            "ghosts", "hangman", "United Nations", "Volleyball", "Soviet Union", "Washington",
+                            "Bookshelf", "Vietnamese", "Japanese", "American", "Korean", "Chinese", "Polish", "Mexican",
+                            "Laos", "Hispanic", "Spike", "Set", "Pass", "Molten", "Intel", "AMD", "Nvidia", "Steam",
+                            "Battlefield", "New Year , New Me", ]
 
 answer_word = (random.choice(random_answer_words_list))
 string1 = answer_word
 answer_in_list = list(answer_word)
+answer_hidden = answer_word
+guesses_left = 8
+
+
 
 # print(answer_word)  # Debug to see Answer.
 
