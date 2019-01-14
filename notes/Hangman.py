@@ -11,11 +11,11 @@ string1 = answer_word
 answer_in_list = list(answer_word)
 answer_hidden = answer_word
 guesses_left = 8
+letters_used = []
+answer_in_list_joined = "".join(answer_in_list)
 
-
-
-# print(answer_word)  # Debug to see Answer.
-
+# print(answer_word)
+# Delete # to enable.
 
 # Custom Word Options - Delete # to enable.
 # custom_word_answer = []
@@ -24,12 +24,15 @@ guesses_left = 8
 # while answer_in_list
 
 player_guess = input("What's your guess?")
+letters_used.append(player_guess)
+
 
 for character in answer_in_list:
     if character == player_guess:
         # replace with a *
         current_index = answer_in_list.index(character)
         answer_in_list.pop(current_index)
-        answer_in_list.insert(current_index, "*")
+        answer_in_list.insert(current_index, "a")
 
 print(answer_in_list)
+print(answer_in_list_joined)
