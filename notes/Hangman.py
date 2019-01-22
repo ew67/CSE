@@ -5,15 +5,14 @@ random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "e
                             "Bookshelf", "Vietnamese", "Japanese", "American", "Korean", "Chinese", "Polish", "Mexican",
                             "Laos", "Hispanic", "Spike", "Set", "Pass", "Molten", "Intel", "AMD", "Nvidia", "Steam",
                             "Battlefield", "New Year , New Me", ]
-answer_word = "boba"
-# Remove After
-# answer_word = (random.choice(random_answer_words_list))
+answer_word = (random.choice(random_answer_words_list))
 string1 = answer_word
 answer_in_list = list(answer_word)
 guesses_left = 8
 letters_used = []
 win = 0
 answer_hidden = []
+answer_hidden_joined = "".join(answer_hidden)
 
 
 def index_of(word, letter, starting_index):
@@ -27,12 +26,6 @@ def index_of(word, letter, starting_index):
     except ValueError:
         return -1
 
-def word_check(word1, word2):
-    if word1 in word2:
-        win = 1
-    else:
-        win = 0
-
 
 for i in range(len(answer_word)):
     answer_hidden.append("*")
@@ -44,7 +37,7 @@ while win == 0:
 
     print()
     player_guess = input("What's your guess?")
-    letters_used.append(player_guess)
+    letters_used.append(player_gu       ess)
 
     if player_guess in answer_in_list:
         print("That's the right letter!")
@@ -60,17 +53,9 @@ while win == 0:
     elif player_guess not in answer_in_list:
         guesses_left -= 1
         print("You have %d guesses left." % guesses_left)
-    elif guesses_left == 0
-
-word_check(answer_hidden, answer_word)
-
-'''for character in answer_in_list:
-    if character == player_guess:
-        # replace with a *
-        current_index = answer_in_list.index(character)
-        answer_in_list.pop(current_index)
-        answer_in_list.insert(current_index, "a")
-'''
-
-print(answer_in_list)
-print("".join(answer_hidden))
+    if guesses_left == 0:
+        print("You've ran out of guesses and have lost.")
+        win = 2
+    if "*" not in answer_hidden:
+        print("You've won the game! You had %d guesses left." % guesses_left)
+        win = 1
