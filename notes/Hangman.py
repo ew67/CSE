@@ -1,4 +1,5 @@
 import random
+import string
 
 random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "edison", "clovis", "black", "white",
                             "ghosts", "hangman", "United Nations", "Volleyball", "Soviet Union", "Washington",
@@ -6,13 +7,14 @@ random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "e
                             "Laos", "Hispanic", "Spike", "Set", "Pass", "Molten", "Intel", "AMD", "Nvidia", "Steam",
                             "Battlefield", "New Year , New Me", ]
 answer_word = (random.choice(random_answer_words_list))
+answer_word = answer_word.lower()
 string1 = answer_word
 answer_in_list = list(answer_word)
 guesses_left = 8
 letters_used = []
 win = 0
 answer_hidden = []
-answer_hidden_joined = "".join(answer_hidden)
+print(answer_word)
 
 
 def index_of(word, letter, starting_index):
@@ -36,8 +38,9 @@ print("This word has %s letters." % len(answer_word))
 while win == 0:
 
     print()
-    player_guess = input("What's your guess?")
-    letters_used.append(player_gu       ess)
+    player_guess = (input("What's your guess?"))
+    player_guess = player_guess.lower()
+    letters_used.append(player_guess)
 
     if player_guess in answer_in_list:
         print("That's the right letter!")
@@ -57,5 +60,8 @@ while win == 0:
         print("You've ran out of guesses and have lost.")
         win = 2
     if "*" not in answer_hidden:
-        print("You've won the game! You had %d guesses left." % guesses_left)
+        if guesses_left > 1:
+            print("You've won the game! You had %d guesses left." % guesses_left)
+        else:
+            print("You've won the game! You had %d guess left." % guesses_left)
         win = 1
