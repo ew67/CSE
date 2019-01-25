@@ -15,8 +15,9 @@ guesses_left = 8
 letters_used = []
 win = 0
 answer_hidden = []
+punctuation_list = list(string.punctuation + " ")
+print(punctuation_list)
 print(answer_word)
-
 
 def index_of(word, letter, starting_index):
     """Finds an index starting at a given point
@@ -33,6 +34,15 @@ def index_of(word, letter, starting_index):
 for i in range(len(answer_word)):
     answer_hidden.append("*")
 
+# Find Punctuation
+for char in punctuation_list:
+    current_index = 0
+    found_index = index_of(answer_in_list, char, current_index)
+    while found_index >= 0:
+        answer_hidden.pop(found_index)
+        answer_hidden.insert(found_index, char)
+        current_index = found_index + 1
+        found_index = index_of(answer_in_list, char, current_index)
 
 print("".join(answer_hidden))
 print("This word has %s letters." % len(answer_word))
@@ -43,10 +53,6 @@ while win == 0:
     player_guess = player_guess.lower()
     letters_used.append(player_guess)
 
-    if string.punctuation in answer_in_list:
-        current_index = answer_in_list.index(string.punctuation)
-        answer_hidden.pop(current_index)
-        answer_hidden.insert(current_index, string.punctuation)
     if player_guess in answer_in_list:
         print("That's the right letter!")
         current_index = 0
@@ -70,19 +76,3 @@ while win == 0:
         else:
             print("You've won the game! You had %d guess left." % guesses_left)
         win = 1
-
-
-
-
-
-
-
-
-'''current_index = 0
-        found_index = index_of(answer_in_list, player_guess, current_index)
-        while found_index >= 0:
-            answer_hidden.pop(found_index)
-            answer_hidden.insert(found_index, player_guess)
-            current_index = found_index + 1
-            found_index = index_of(answer_in_list, player_guess, current_index)
-'''
