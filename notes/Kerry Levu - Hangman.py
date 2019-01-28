@@ -5,9 +5,8 @@ random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "e
                             "ghosts", "hangman", "United Nations", "Volleyball", "Soviet Union", "Washington",
                             "Bookshelf", "Vietnamese", "Japanese", "American", "Korean", "Chinese", "Polish", "Mexican",
                             "Laos", "Hispanic", "Spike", "Set", "Pass", "Molten", "Intel", "AMD", "Nvidia", "Steam",
-                            "Battlefield", "New Year , New Me", ]
-# answer_word = (random.choice(random_answer_words_list))
-answer_word = "New Year,, New Me"
+                            "Battlefield", "New Year , New Me", "That's pretty good", "this is cancer", "reddit", ]
+answer_word = (random.choice(random_answer_words_list))
 answer_word = answer_word.lower()
 string1 = answer_word
 answer_in_list = list(answer_word)
@@ -16,8 +15,7 @@ letters_used = []
 win = 0
 answer_hidden = []
 punctuation_list = list(string.punctuation + " ")
-print(punctuation_list)
-print(answer_word)
+
 
 def index_of(word, letter, starting_index):
     """Finds an index starting at a given point
@@ -45,7 +43,9 @@ for char in punctuation_list:
         found_index = index_of(answer_in_list, char, current_index)
 
 print("".join(answer_hidden))
-print("This word has %s letters." % len(answer_word))
+
+print("The answer has %d letters." % len(answer_word))
+
 while win == 0:
 
     print()
@@ -67,6 +67,7 @@ while win == 0:
     elif player_guess not in answer_in_list:
         guesses_left -= 1
         print("You have %d guesses left." % guesses_left)
+        print("".join(answer_hidden))
     if guesses_left == 0:
         print("You've ran out of guesses and have lost.")
         win = 2
