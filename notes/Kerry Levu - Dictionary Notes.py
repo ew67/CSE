@@ -90,3 +90,25 @@ complex_dictionary = {
 
 print(complex_dictionary["RI"]["CITIES"][2])
 
+# Open your notes, and get it to say "Virginia",
+# Then get it to say "Bethesda"
+
+print(complex_dictionary["MD"]["CITIES"][0])
+
+print(complex_dictionary.keys())  # Lists all Keys available
+
+print(nested_dictionary.items())  # Lists all Items in Keys
+
+for key, value in complex_dictionary.items():
+    print(key)
+    print(value)
+    print("-" * 20)
+
+# We're going to make this look great...
+for state, facts in complex_dictionary.items():
+    for attr, value in facts.items():
+        print(attr)
+        print(value)
+
+        print("-" * 20)
+    print('=' * 20)
