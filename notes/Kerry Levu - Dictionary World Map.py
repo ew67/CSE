@@ -37,4 +37,6 @@ while playing:
             current_node = world_map[room_name]
         except KeyError:
             print("I can't go that way.")
+    else:
+        print("Command Not Recognized.  ")
 
