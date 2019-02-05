@@ -4,19 +4,24 @@ world_map = {
         'DESCRIPTION': "This the classroom that you are in right"
                        " now. It has two exits to the north side.",
         'PATHS': {
-            'NORTH': "PARKING_LOT"
+            'NORTH': "HOUSE_GARAGE"
 
         }
     },
     'HOUSE_GARAGE': {
-        'NAME': "The Edison Parking Lot",
-        'DECSCRIPTION': "These are cars parked here. To "
-                        "the south is Mr. Wiebe's room",
+        'NAME': "Kerry's Garage",
+        'DESCRIPTION': "These are cars parked here. To the south is Mr. Wiebe's room",
         'PATHS': {
             'SOUTH': 'MAIN_DRIVEWAY'
         }
 
+    },
+    'WASHING_ROOM': {
+        'NAME': "Kerry's Washing Room",
+        'DESCRIPTION': "There's a dryer and washing machine. Nearby a cabinet is open."
+
     }
+
 }
 
 # Other Variables
@@ -27,6 +32,7 @@ playing = True
 
 # Controller
 while playing:
+    print()
     print(current_node["NAME"])
     print(current_node['DESCRIPTION'])
     command = input(">_")
