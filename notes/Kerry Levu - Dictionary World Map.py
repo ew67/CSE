@@ -1,8 +1,7 @@
 world_map = {
     'MAIN_DRIVEWAY': {
         'NAME': 'Kerry' + "'s" + " Driveway",
-        'DESCRIPTION': "This the classroom that you are in right"
-                       " now. It has two exits to the north side.",
+        'DESCRIPTION': "You're outside. There are cars in front of you. The garage is slightly opened.",
         'PATHS': {
             'NORTH': "HOUSE_GARAGE"
 
@@ -10,7 +9,7 @@ world_map = {
     },
     'HOUSE_GARAGE': {
         'NAME': "Kerry's Garage",
-        'DESCRIPTION': "These are cars parked here. To the south is Mr. Wiebe's room",
+        'DESCRIPTION': "The garage is empty.",
         'PATHS': {
             'SOUTH': 'MAIN_DRIVEWAY',
             'NORTH': 'WASHING_ROOM'
@@ -27,7 +26,8 @@ world_map = {
     },
     'DOWNSTAIRS_HALLWAY': {
         'NAME': 'Hallway',
-        'DESCRIPTION': "You're in a hallway. There's an old painting on the wall.",
+        'DESCRIPTION': "You're in a hallway. There's an old painting on the wall."
+                       "There's a door to your left. The hallway continues west.",
         'PATHS': {
             'WEST': "KENDRICK_ROOM",
             'EAST': 'DOWNSTAIRS_HALLWAY_CONT',
@@ -43,6 +43,70 @@ world_map = {
             'EAST': 'Living Room',
 
         }
+
+    },
+    "KENDRICK'S ROOM": {
+        'NAME': "Kendrick's Room",
+        'DESCRIPTION': "The room looks normal, but the wooden floors creak.",
+        'PATHS': {
+            'EAST': 'DOWNSTAIRS_HALLWAY',
+            'DOWN': 'BASEMENT'
+        }
+
+    },
+    "MONIQUE'S ROOM": {
+        'NAME': "Monique's Room",
+        'DESCRIPTION': 'You came through the wall. There' + 's' + "and old keycard with 2581 printed on them.",
+        'PATHS': {
+
+}
+    },
+    'DOWNSTAIRS_LIVING_ROOM': {
+
+    },
+    'DINING_ROOM': {
+
+    },
+    'KITCHEN': {
+
+    },
+    'STAIRWELL': {
+
+    },
+    'UPSTAIRS_STAIRWELL': {
+
+    },
+    'UPSTAIRS_MAIN_HALLWAY': {
+
+    },
+    'UPSTAIRS_LIVING_ROOM': {
+
+    },
+    'MASTER_BED_ROOM': {
+
+    },
+    'MASTER_HALLWAY': {
+
+    },
+    'MASTER_NORTH_CLOSET': {
+
+    },
+    'MASTER_SOUTH_CLOSET': {
+
+    },
+    'MASTER_BATHROOM': {
+
+    },
+    'UPSTAIRS_HALLWAY_EAST': {
+
+    },
+    'UPSTAIRS_BATHROOM': {
+
+    },
+    'UPSTAIRS_KENNY_ROOM': {
+
+    },
+    'UPSTAIRS_LILIE_ROOM': {
 
     }
 }
