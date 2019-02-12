@@ -22,5 +22,5 @@ class WaterGun(object):
             print("There's no trigger!")
 
 
-my_water_gun = WaterGun
+my_water_gun = WaterGun(1.0, 1, False, 10)
 
