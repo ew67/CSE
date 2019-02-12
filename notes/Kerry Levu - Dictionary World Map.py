@@ -27,25 +27,25 @@ world_map = {
     'DOWNSTAIRS_HALLWAY': {
         'NAME': 'Hallway',
         'DESCRIPTION': "You're in a hallway. There's an old painting on the wall."
-                       "There's a door to your left. The hallway continues west.",
+                       " There's a door to your left. The hallway continues west.",
         'PATHS': {
-            'WEST': "KENDRICK_ROOM",
+            'WEST': "KENDRICK'S_ROOM",
             'EAST': 'DOWNSTAIRS_HALLWAY_CONT',
 
         }
     },
     'DOWNSTAIRS_HALLWAY_CONT': {
         'NAME': "Hallway",
-        'DESCRIPTION': "You're still in the hallway. There is a room on your left and right.",
+        'DESCRIPTION': "You're still in the hallway. There is a room in front and behind you.",
         'PATHS': {
-            'NORTH': "Monique's Room",
-            'SOUTH': "Downstair's Bathroom",
-            'EAST': 'Living Room',
+            'NORTH': "MONIQUE'S_ROOM",
+            'SOUTH': "DOWNSTAIRS_BATHROOM",
+            'EAST': 'DOWNSTAIRS_LIVING_ROOM',
 
         }
 
     },
-    "KENDRICK'S ROOM": {
+    "KENDRICK'S_ROOM": {
         'NAME': "Kendrick's Room",
         'DESCRIPTION': "The room looks normal, but the wooden floors creak.",
         'PATHS': {
@@ -54,17 +54,41 @@ world_map = {
         }
 
     },
-    "MONIQUE'S ROOM": {
+    "MONIQUE'S_ROOM": {
         'NAME': "Monique's Room",
-        'DESCRIPTION': 'You came through the wall. There' + 's' + "and old keycard with 2581 printed on them.",
+        'DESCRIPTION': 'You came through the wall. There' + 's' + "and old keycard with 2581 printed on it.",
         'PATHS': {
+            'SOUTH': 'DOWNSTAIRS_HALLWAY_CONT',
+            'WEST': 'DOWNSTAIRS_HALLWAY'
+        }
+    },
+    'DOWNSTAIRS_BATHROOM': {
+        'NAME': 'Downstairs Bathroom',
+        'DESCRIPTION': "It smells really bad. ",
+        'PATHS': {
+            'NORTH': 'DOWNSTAIRS_HALLWAY_CONT',
 
-}
+        }
     },
     'DOWNSTAIRS_LIVING_ROOM': {
+        'NAME': 'Living Room',
+        'DESCRIPTION': "You're in a Living Room.",
+        'PATHS': {
+            'WEST': "DOWNSTAIRS_HALLWAY_CONT",
+            'SOUTH': 'STAIRWELL',
+            'EAST': 'DINING_ROOM'
+
+
+        }
 
     },
     'DINING_ROOM': {
+        'NAME': 'Dining Room',
+        'DESCRIPTION': "There's fresh food lying on the table.",
+        'PATHS': {
+            'SOUTH': 'KITCHEN',
+            'WEST': 'LIVING_ROOM',
+        }
 
     },
     'KITCHEN': {
