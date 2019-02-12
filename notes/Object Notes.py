@@ -23,4 +23,5 @@ class WaterGun(object):
 
 
 my_water_gun = WaterGun(1.0, 1, False, 10)
-
+your_water_gun = WaterGun(2, 1, False, 200)
+wiebe_water_gun = WaterGun(9999999999999999, 999999999999, false, 99999999999999999999999)
