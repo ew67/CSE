@@ -1,6 +1,7 @@
 import random
 
-class Waterbottle:
+
+class WaterBottle:
     def __init__(self, amountin=100, capacity=100, cap=False, color="black", rate_of_fire=5,
                  opacity="transparent", material="plastic"):
         self.capacity = capacity
@@ -9,25 +10,36 @@ class Waterbottle:
         self.rate_of_fire = rate_of_fire
         self.opacity = opacity
         self.material = material
-        self.amountin = amountin
+        self.amount_in = amountin
 
     def refill(self):
-        self.amountin = 100
+        self.amount_in = 100
+
     def empty(self):
-        self.amountin = 0
+        self.amount_in = 0
+
     def consume(self):
-        print("You have %d in the water bottle." % self.amountin)
+        print("You have %d in the water bottle." % self.amount_in)
         want = input("How much do you want to drink?")
         want = int(want)
-        amount_left = self.amountin - want
-        print("You have %d in the water bottle." % amount_left)
-    # def bottle_flip:
-    #     random.randint(1,6)
+        self.amount_in = self.amount_in - want
+        print("You have %d in the water bottle." % self.amount_in)
+
+    def bottle_flip(self):
+        if self.amount_in == 30:
+            chance = random.randint(1, 6)
+            if chance == 6:
+                print("You bottle flipped correctly. +6 to your attack.")
+            else:
+                print("Everyone laughs at you. You die.")
+        elif self.amount_in > 30:
+            print("You have too much water")
+        elif self.amount_in < 30:
+            print("You don't have enough water.")
 
 
+my_watterbottle = WaterBottle(100, 10, False, "green", 1, "opaque", "steel")
 
-kyle_waterbottle = Waterbottle(100, 10, False, "green", 1, "opaque", "steel")
-
-print(kyle_waterbottle)
-
-kyle_waterbottle.consume()
+my_watterbottle.consume()
+my_watterbottle.bottle_flip()
+my_watterbottle.refill()
