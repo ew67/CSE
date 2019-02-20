@@ -91,7 +91,7 @@ world_map = {
         }
 
     },
-    'KITCHEN': {
+        'KITCHEN': {
 
     },
     'STAIRWELL': {
