@@ -84,14 +84,14 @@ world_map = {
     },
     'DINING_ROOM': {
         'NAME': 'Dining Room',
-        'DESCRIPTION': "There's fresh food lying on the table.",
+        'DESCRIPTION': "There's fresh food lying on the table!",
         'PATHS': {
             'SOUTH': 'KITCHEN',
             'WEST': 'LIVING_ROOM',
         }
 
     },
-        'KITCHEN': {
+    'KITCHEN': {
 
     },
     'STAIRWELL': {
