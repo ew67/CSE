@@ -9,6 +9,21 @@ class Room(object):
         self.down = down
         self.description = description
 
+
+class Player(object):
+    def __init__(self, starting_location):
+        self.health = 100
+        self.current_location = starting_location
+        self.inventory = []
+
+    def move(self, newlocation):
+        """This method moves a character to a new location
+
+        :param newlocation: The variable containing a room object
+        """
+        self.current_location = newlocation
+
+
 # Option 1
 # Add dependent rooms after
 
@@ -23,7 +38,7 @@ R19A.north = parking_lot
 
 R19A = Room("R19A", 'parking_lot')
 parking_lot = Room('The Parking Lot', None, 'R19A')
-
+playing = True
 
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.")
@@ -62,3 +77,27 @@ MASTER_BATHROOM = Room("Master Bathroom", None, None, MASTER_HALLWAY)
 UPSTAIRS_HALLWAY_CONT = Room("East Upstairs Hallway", 'UPSTAIRS_HALLWAY_NORTH', None, None, UPSTAIRS_HALLWAY)
 UPSTAIRS_HALLWAY_NORTH = Room("North Upstairs Hallway", 'LILIE_ROOM', UPSTAIRS_HALLWAY_CONT, 'UPSTAIRS_BATHROOM')
 LILIE_ROOM = Room("Lilie's Room", None, UPSTAIRS_HALLWAY_NORTH)
+
+
+player = Player(MAIN_DRIVEWAY)
+
+directions = ['north', 'south', 'east', 'west', 'up', 'down']
+
+while playing:
+    print()
+    print(player.current_location.name)
+    print(player.current_location.description)
+    command = input(">_")
+    if command.lower() in ['q', 'quit', 'exit']:
+        playing = False
+    elif command.lower() in directions:
+        try:
+            # command = 'north'
+            room_object = getattr(player.current_location, command)
+            # NEEDED FOR OPTION 2
+            room_var = globals()[room_object]
+            player.move(room_object)
+        except KeyError:
+            print("I can't go that way.")
+    else:
+        print("Command Not Recognized.")
