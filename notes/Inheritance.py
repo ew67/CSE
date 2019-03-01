@@ -42,6 +42,22 @@ class Tesla(Car):
         super(Tesla, self).__init__("Tesla", "Electric", "slim")
 
 
+class KeylessCar(Car):
+    def __init__(self, name, engine_type, body_type):
+        super(KeylessCar, self).__init__(name, engine_type, body_type)
+
+    def start_engine(self):
+        self.engine_status = True
+        print("You push the button and the car starts.")
+
+
+
+
 my_car = Tesla()
 my_car.start_engine()
 my_car.move_forward()
+
+adam_car = KeylessCar("Adam's Ride", "Diesel", "Toaster")  # This is an instance
+adam_car.start_engine()
+adam_car.move_forward()
+adam_car.turn_off()
