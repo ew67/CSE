@@ -38,8 +38,8 @@ class WaterBottle:
             print("You don't have enough water.")
 
 
-my_watterbottle = WaterBottle(100, 10, False, "green", 1, "opaque", "steel")
+my_watter_bottle = WaterBottle(100, 10, False, "green", 1, "opaque", "steel")
 
-my_watterbottle.consume()
-my_watterbottle.bottle_flip()
-my_watterbottle.refill()
+my_watter_bottle.consume()
+my_watter_bottle.bottle_flip()
+my_watter_bottle.refill()

@@ -5,7 +5,7 @@ random_answer_words_list = ["purple", "blue", "dog", "cat", "sky", "biology", "e
                             "ghosts", "hangman", "United Nations", "Volleyball", "Soviet Union", "Washington",
                             "Bookshelf", "Vietnamese", "Japanese", "American", "Korean", "Chinese", "Polish", "Mexican",
                             "Laos", "Hispanic", "Spike", "Set", "Pass", "Molten", "Intel", "AMD", "Nvidia", "Steam",
-                            "Battlefield", "New Year , New Me", "That's pretty good", "this is cancer", "reddit", ]
+                            "Battlefield", "New Year , New Me", "That's pretty good", "this is cancer", "Reddit", ]
 answer_word = (random.choice(random_answer_words_list))
 answer_word = answer_word.lower()
 string1 = answer_word
