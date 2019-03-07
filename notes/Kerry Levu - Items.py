@@ -7,6 +7,24 @@ class Item(object):
         self.Value = value
 
 
+class Consumable(Item):
+    def __init__(self, name, value, durability):
+        super(Consumable, self).__init__(name, value)
+        self.durability = durability
+
+
+class Potions(Consumable):
+    def __init__(self, name, value, durability, splash=False):
+        super(Potions, self).__init__(name, value, durability)
+        self.splash = splash
+
+
+class HealthPotion(Potions):
+    def __init__(self, name, value, durability, heal_amount, splash):
+        super(HealthPotion, self).__init__(name, value, durability, splash)
+        self.HealAmount = heal_amount
+
+
 class Weapon(Item):
     def __init__(self, name, value, damage, element, role, material):
         super(Weapon, self).__init__(name, value)
@@ -16,7 +34,6 @@ class Weapon(Item):
         self.material = material
 
     def attack(self):
-        enemy_hp -= self.damage
         print("You swung your sword and did %s damage" % self.damage)
 
     @staticmethod
@@ -41,6 +58,17 @@ class Ranged(Weapon):
         self.weapon_range = weapon_range
 
 
+class Bow(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range):
+        super(Bow, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
+
+
+class Gun(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, magazine):
+        super(Gun, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
+        self.magazine = magazine
+
+
 class Sword(Melee):
     def __init__(self, name, value, damage, element, role, material, sword_type, handedness):
         super(Sword, self).__init__(name, value, damage, element, role, material, handedness)
@@ -52,7 +80,7 @@ class Mace(Melee):
         super(Mace, self).__init__(name, value, damage, element, role, material, handedness)
 
 
-god_mace = Mace("Mac", "1500", 5, "Fire", "Knight", "Diamond", "1-Handed")
-
-
-god_mace.attack()
+class Whip(Melee):
+    def __init__(self, name, value, damage, element, role, material, whip_range):
+        super(Whip, self).__init__(name, value, damage, element, role, material, handedness=False)
+        self.range = whip_range
