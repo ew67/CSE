@@ -7,6 +7,34 @@ class Item(object):
         self.Value = value
 
 
+class Armor(Item):
+    def __init__(self, name, value, durability, material, defense=5):
+        super(Armor, self).__init__(name, value)
+        self.durability = durability
+        self.material = material
+        self.defense = defense
+
+
+class Helmet(Armor):
+    def __init__(self, name, value, durability, material):
+        super(Helmet, self).__init__(name, value, durability, material, 2)
+
+
+class ChestPlate(Armor):
+    def __init__(self, name, value, durability, material):
+        super(ChestPlate, self).__init__(name, value, durability, material, 4)
+
+
+class Leggings(Armor):
+    def __init__(self, name, value, durability, material):
+        super(Leggings, self).__init__(name, value, durability, material, 3)
+
+
+class Boots(Armor):
+    def __init__(self, name, value, durability, material):
+        super(Boots, self).__init__(name, value, durability, material, 1)
+
+
 class Consumable(Item):
     def __init__(self, name, value, durability):
         super(Consumable, self).__init__(name, value)
@@ -14,19 +42,21 @@ class Consumable(Item):
 
 
 class Potions(Consumable):
-    def __init__(self, name, value, durability, splash=False):
+    def __init__(self, name, value, durability, heal_amount, mana_amount, splash=False):
         super(Potions, self).__init__(name, value, durability)
         self.splash = splash
+        self.heal_amount = heal_amount
+        self.mana_amount = mana_amount
 
 
-class HealthPotion(Potions):
-    def __init__(self, name, value, durability, heal_amount, splash):
-        super(HealthPotion, self).__init__(name, value, durability, splash)
-        self.HealAmount = heal_amount
+class Food(Consumable):
+    def __init__(self, name, value, durability, buff):
+        super(Food, self).__init__(name, value, durability)
+        self.buff = buff
 
 
 class Weapon(Item):
-    def __init__(self, name, value, damage, element, role, material):
+    def __init__(self, name, damage, element, role, material, value):
         super(Weapon, self).__init__(name, value)
         self.damage = damage
         self.element = element
@@ -37,7 +67,7 @@ class Weapon(Item):
         print("You swung your sword and did %s damage" % self.damage)
 
     @staticmethod
-    def block():
+    def parry():
         chance = random.randint(0, 1)
         if chance == 1:
             print("You've successfully blocked the attack!")
@@ -49,6 +79,25 @@ class Melee(Weapon):
     def __init__(self, name, value, damage, element, role, material, handedness):
         super(Melee, self).__init__(name, value, damage, element, role, material)
         self.handedness = handedness
+
+
+class Shield(Melee):
+    def __init__(self, name, damage, element, role, material, value, damage_block):
+        super(Shield, self).__init__(name, damage, element, role, material, value, 1)
+        self.damage_negation = damage_block
+
+    @staticmethod
+    def shield_block():
+        print("You raise your shield in a defensive position.")
+
+    @staticmethod
+    def shield_bash():
+        chance = random.randint(0, 1)
+        if chance == 1:
+            print("You charge with your shield, stunning the enemy.")
+        else:
+            print("You try charging forward, but your Note 8 falls out of your pocket and the back glass cracks. "
+                  "You die.")
 
 
 class Ranged(Weapon):
@@ -69,6 +118,12 @@ class Gun(Ranged):
         self.magazine = magazine
 
 
+class RocketLauncher(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, explosion_range):
+        super(RocketLauncher, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
+        self.explosion_range = explosion_range
+
+
 class Sword(Melee):
     def __init__(self, name, value, damage, element, role, material, sword_type, handedness):
         super(Sword, self).__init__(name, value, damage, element, role, material, handedness)
@@ -84,3 +139,5 @@ class Whip(Melee):
     def __init__(self, name, value, damage, element, role, material, whip_range):
         super(Whip, self).__init__(name, value, damage, element, role, material, handedness=False)
         self.range = whip_range
+
+
