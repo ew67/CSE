@@ -100,30 +100,6 @@ class Shield(Melee):
                   "You die.")
 
 
-class Ranged(Weapon):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range):
-        super(Ranged, self).__init__(name, value, damage, element, role, material)
-        self.ammo_type = ammo_type
-        self.weapon_range = weapon_range
-
-
-class Bow(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range):
-        super(Bow, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-
-
-class Gun(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, magazine):
-        super(Gun, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-        self.magazine = magazine
-
-
-class RocketLauncher(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, explosion_range):
-        super(RocketLauncher, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-        self.explosion_range = explosion_range
-
-
 class Sword(Melee):
     def __init__(self, name, value, damage, element, role, material, sword_type, handedness):
         super(Sword, self).__init__(name, value, damage, element, role, material, handedness)
@@ -141,3 +117,55 @@ class Whip(Melee):
         self.range = whip_range
 
 
+class Dagger(Melee):
+    def __init__(self, name, value, damage, element, role, material, chance_bleed):
+        super(Dagger, self).__init__(name, value, damage, element, role, material, handedness=False)
+        self.chance_bleed = chance_bleed
+
+    @staticmethod
+    def stab():
+        chance = random.randint(0, 1)
+        if chance == 1:
+            print("You gave them a present from the back.")
+        else:
+            print("Your Note 8 lights up, and gives your position away. You try to turn it off, but an arrow "
+                  "comes by and cracks the screen. You die.")
+
+
+class Ranged(Weapon):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate):
+        super(Ranged, self).__init__(name, value, damage, element, role, material)
+        self.ammo_type = ammo_type
+        self.weapon_range = weapon_range
+        self.fire_rate = fire_rate
+
+
+class Throwables(Ranged):
+    def __init__(self, name, value, damage, material, weapon_range, fire_rate):
+        super(Throwables, self).__init__(name, value, damage, None, None, material, None, weapon_range, fire_rate)
+
+
+class Bow(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate):
+        super(Bow, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate)
+
+
+class Gun(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, magazine, fire_rate):
+        super(Gun, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate)
+        self.magazine = magazine
+
+
+class RocketLauncher(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, explosion_range,
+                 fire_rate):
+        super(RocketLauncher, self).__init__(name, value, damage, element, role, material, ammo_type,
+                                             weapon_range, fire_rate)
+        self.explosion_range = explosion_range
+
+
+class Magic(Ranged):
+    def __init__(self, name, value, damage, element, role, material, weapon_range, fire_rate, mana, projectile):
+        super(Magic, self).__init__(name, value, damage, element, role, material, None, weapon_range, fire_rate)
+        self.mana_cost = mana
+        self.projectile = projectile
