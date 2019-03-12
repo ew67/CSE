@@ -169,3 +169,17 @@ class Magic(Ranged):
         super(Magic, self).__init__(name, value, damage, element, role, material, None, weapon_range, fire_rate)
         self.mana_cost = mana
         self.projectile = projectile
+
+
+Meteor_Rod = Magic("Meteor Rod", 1000, 24, "Earth", "Mage", "Moon_Rock", 3, 2, 5, "Meteor")
+RPG = RocketLauncher("RPG", 1000, 50, "Fire", "Demo", "Iron", "Rockets", 3, 2, .5)
+Zeus = Gun("Zeus", 50, 12, "Electricity", "Ranged", "Iron", "Electric_Bullet", 5, 30, 5)
+V_Power = Bow("rewoP_V", 3000, 67, None, "Ranged", "Wood", "Arrows", 6, 1)
+Caltrops = Throwables("Spikes", 50, 5, "Iron", 1, 5)
+Karyst = Dagger("Karyst", 1500, 34, "Toxin", "Assassin", "Moon_Rock", 35)
+Matterbul = Whip("Materbul", 1700, 43, None, None, "Leather", 8)
+Maciella = Mace("Maciella", 2500, 70, None, None, "Cobalt", 2)
+Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword", 1)
+Stanford = Shield("Stanford", 15, None, "Knight", "Tin", 500, 10)
+Health_Potion = Potions("Health Pot", 50, "1", 50, 10)
+Cake = Food("Cake", 100, 5, "Well Fed")
