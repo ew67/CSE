@@ -183,3 +183,7 @@ Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword
 Stanford = Shield("Stanford", 15, None, "Knight", "Tin", 500, 10)
 Health_Potion = Potions("Health Pot", 50, "1", 50, 10)
 Cake = Food("Cake", 100, 5, "Well Fed")
+Wood_Helmet = Helmet("Wood Helmet", 250, 25, "Wood")
+Iron_Chest = ChestPlate("Iron_Chest", 600, 100, "Iron")
+Gold_Leggings = Leggings("Gold Leggings", 500, 75, "Gold")
+Diamond_Slides = Boots("Diamond Slides", 1500, 1500, "Diamond")
