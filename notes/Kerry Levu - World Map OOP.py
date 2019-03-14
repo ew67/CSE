@@ -2,7 +2,10 @@ import random
 
 
 class Room(object):
-    def __init__(self, name, north=None, south=None, east=None, west=None, up=None, down=None, description=""):
+    def __init__(self, name, north=None, south=None, east=None, west=None, up=None, down=None, description="",
+                 characters=None):
+        if characters is None:
+            characters = []
         self.name = name
         self.north = north
         self.south = south
@@ -11,13 +14,12 @@ class Room(object):
         self.up = up
         self.down = down
         self.description = description
-        self.character = []
+        self.character = characters
 
 
 class Monster(object):
-    def __init__(self, starting_location):
+    def __init__(self):
         self.health = 100
-        self.current_location = starting_location
 
 
 class Item(object):
@@ -159,9 +161,9 @@ class Ranged(Weapon):
         self.fire_rate = fire_rate
 
 
-class Throwables(Ranged):
+class Throwable(Ranged):
     def __init__(self, name, value, damage, material, weapon_range, fire_rate):
-        super(Throwables, self).__init__(name, value, damage, None, None, material, None, weapon_range, fire_rate)
+        super(Throwable, self).__init__(name, value, damage, None, None, material, None, weapon_range, fire_rate)
 
 
 class Bow(Ranged):
@@ -222,22 +224,32 @@ class Player(object):
         self.current_location = new_location
 
 
-# Option 1
-# Add dependent rooms after
+# Items
+# ======================================================================================================================
+Meteor_Rod = Magic("Meteor Rod", 1000, 24, "Earth", "Mage", "Moon_Rock", 3, 2, 5, "Meteor")
+RPG = RocketLauncher("RPG", 1000, 50, "Fire", "Demo", "Iron", "Rockets", 3, 2, .5)
+Zeus = Gun("Zeus", 50, 12, "Electricity", "Ranged", "Iron", "Electric_Bullet", 5, 30, 5)
+V_Power = Bow("rewoP_V", 3000, 67, None, "Ranged", "Wood", "Arrows", 6, 1)
+Caltrops = Throwable("Spikes", 50, 5, "Iron", 1, 5)
+Karyst = Dagger("Karyst", 1500, 34, "Toxin", "Assassin", "Moon_Rock", 35)
+Matterbul = Whip("Materbul", 1700, 43, None, None, "Leather", 8)
+Maciella = Mace("Maciella", 2500, 70, None, None, "Cobalt", 2)
+Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword", 1)
+Stanford = Shield("Stanford", 15, None, "Knight", "Tin", 500, 10)
+Health_Potion = Potions("Health Pot", 50, "1", 50, 10)
+Cake = Food("Cake", 100, 5, "Well Fed")
+Wood_Helmet = Helmet("Wood Helmet", 250, 25, "Wood")
+Iron_Chest = ChestPlate("Iron_Chest", 600, 100, "Iron")
+Gold_Leggings = Leggings("Gold Leggings", 500, 75, "Gold")
+Diamond_Slides = Boots("Diamond Slides", 1500, 1500, "Diamond")
 
 
-R19A = Room("R19A")
-parking_lot = Room('The Parking Lot', None, R19A)
+# Characters
+# ======================================================================================================================
+Big_Scary_Man = Monster()
 
-R19A.north = parking_lot
-
-# Option 2
-# Put them in quotes
-
-R19A = Room("R19A", 'parking_lot')
-parking_lot = Room('The Parking Lot', None, 'R19A')
-playing = True
-
+# Rooms
+# ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.")
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
@@ -275,7 +287,7 @@ MASTER_BED_ROOM = Room("Master Bedroom", 'MASTER_BALCONY', 'UPSTAIRS_HALLWAY', N
                        "The room is quite large. The room is thoroughly decorated with pictures. North is a door."
                        " East is a hallway.")
 MASTER_BALCONY = Room("Upstairs Balcony", None, 'MASTER_BED_ROOM', None, None, None, None,
-                      "You get a better view of the surroundings from up here.")
+                      "You get a better view of the surroundings from up here.", [Big_Scary_Man])
 MASTER_HALLWAY = Room("Master Hallway", 'MASTER_NORTH_CLOSET', 'MASTER_SOUTH_CLOSET', None,
                       'MASTER_BATHROOM', "North is a door, to the South is another door. The East door is open.")
 MASTER_NORTH_CLOSET = Room("North Closet", None, 'MASTER_HALLWAY', None, None, None, None,
@@ -293,20 +305,16 @@ UPSTAIRS_BATHROOM = Room("Upstairs Bathroom", None, None, None, 'UPSTAIRS_HALLWA
 LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, None, None, "A barren room with a bed.")
 KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.")
 
-# Items
-sword = Weapon("SNSV", 43, None, "Knight", "Iron", 1500)
-sword2 = Weapon("VSNS", 60, None, None, None, 1700)
-
-c1 = Character("lol", 100, sword, None)
-c2 = Character("lol2", 100, sword2, None)
-c1.attack(c2)
-
 player = Player(MAIN_DRIVEWAY)
-Big_Scary_Man = Monster(DOWNSTAIRS_STAIRWELL)
+
 
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
+playing = True
 
 while playing:
+    if Characters in player.current_location:
+        print("Your Note 8 spawns an enemy on accident. You have to fight it!")
+
     print()
     print(player.current_location.name)
     print(player.current_location.description)
@@ -315,7 +323,6 @@ while playing:
         playing = False
     elif command.lower() in directions:
         try:
-            # command = 'north'
             room_name = getattr(player.current_location, command)
             room_object = globals()[room_name]
             player.move(room_object)
