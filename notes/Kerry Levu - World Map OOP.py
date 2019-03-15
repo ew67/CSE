@@ -286,7 +286,7 @@ UPSTAIRS_LIVING_ROOM = Room("Upstairs Living Room", None, None, 'UPSTAIRS_HALLWA
 MASTER_BED_ROOM = Room("Master Bedroom", 'MASTER_BALCONY', 'UPSTAIRS_HALLWAY', None, 'MASTER_HALLWAY',
                        "The room is quite large. The room is thoroughly decorated with pictures. North is a door."
                        " East is a hallway.")
-MASTER_BALCONY = Room("Upstairs Balcony", None, 'MASTER_BED_ROOM', None, None, None, None,
+MASTER_BALCONY = Room("Balcony", None, 'MASTER_BED_ROOM', None, None, None, None,
                       "You get a better view of the surroundings from up here.", [Big_Scary_Man])
 MASTER_HALLWAY = Room("Master Hallway", 'MASTER_NORTH_CLOSET', 'MASTER_SOUTH_CLOSET', None,
                       'MASTER_BATHROOM', "North is a door, to the South is another door. The East door is open.")
@@ -307,13 +307,15 @@ KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, Non
 
 player = Player(MAIN_DRIVEWAY)
 
+# Controller ===========================================================================================================
 
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
 playing = True
 
+
 while playing:
-    if Characters in player.current_location:
-        print("Your Note 8 spawns an enemy on accident. You have to fight it!")
+
+        # print("Your Note 8 spawns an enemy on accident. You have to fight it!")
 
     print()
     print(player.current_location.name)
@@ -332,3 +334,5 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
+
+
