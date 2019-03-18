@@ -1,4 +1,5 @@
 import random
+from pprint import pprint
 
 
 class Room(object):
@@ -288,6 +289,7 @@ MASTER_BED_ROOM = Room("Master Bedroom", 'MASTER_BALCONY', 'UPSTAIRS_HALLWAY', N
                        " East is a hallway.")
 MASTER_BALCONY = Room("Balcony", None, 'MASTER_BED_ROOM', None, None, None, None,
                       "You get a better view of the surroundings from up here.", [Big_Scary_Man])
+re = MASTER_BALCONY
 MASTER_HALLWAY = Room("Master Hallway", 'MASTER_NORTH_CLOSET', 'MASTER_SOUTH_CLOSET', None,
                       'MASTER_BATHROOM', "North is a door, to the South is another door. The East door is open.")
 MASTER_NORTH_CLOSET = Room("North Closet", None, 'MASTER_HALLWAY', None, None, None, None,
@@ -314,9 +316,6 @@ playing = True
 
 
 while playing:
-
-        # print("Your Note 8 spawns an enemy on accident. You have to fight it!")
-
     print()
     print(player.current_location.name)
     print(player.current_location.description)
@@ -334,5 +333,5 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
-
-
+    if Character is None in MASTER_BALCONY.character:
+        print("It's empty")
