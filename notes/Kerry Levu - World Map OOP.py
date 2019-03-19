@@ -4,9 +4,7 @@ from pprint import pprint
 
 class Room(object):
     def __init__(self, name, north=None, south=None, east=None, west=None, up=None, down=None, description="",
-                 characters=None):
-        if characters is None:
-            characters = []
+                 characters=[], items=[]):
         self.name = name
         self.north = north
         self.south = south
@@ -16,6 +14,7 @@ class Room(object):
         self.down = down
         self.description = description
         self.character = characters
+        self.items = items
 
 
 class Monster(object):
@@ -255,7 +254,7 @@ MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, No
                      "You're outside. There are cars in front of you. The garage is slightly opened.")
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
-                    "There's a dryer and washing machine. Nearby a cabinet is open.")
+                    "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man], [])
 DOWNSTAIRS_HALLWAY = Room("Downstairs Hallway", 'MONIQUE_ROOM', 'WASHING_ROOM', 'DOWNSTAIRS_HALLWAY_CONT',
                           'KENDRICK_ROOM', None, None, "You're in a hallway. There's an old painting on the wall. "
                                                        "There's a door to your left. The hallway continues West.")
@@ -289,7 +288,6 @@ MASTER_BED_ROOM = Room("Master Bedroom", 'MASTER_BALCONY', 'UPSTAIRS_HALLWAY', N
                        " East is a hallway.")
 MASTER_BALCONY = Room("Balcony", None, 'MASTER_BED_ROOM', None, None, None, None,
                       "You get a better view of the surroundings from up here.", [Big_Scary_Man])
-re = MASTER_BALCONY
 MASTER_HALLWAY = Room("Master Hallway", 'MASTER_NORTH_CLOSET', 'MASTER_SOUTH_CLOSET', None,
                       'MASTER_BATHROOM', "North is a door, to the South is another door. The East door is open.")
 MASTER_NORTH_CLOSET = Room("North Closet", None, 'MASTER_HALLWAY', None, None, None, None,
@@ -298,27 +296,33 @@ MASTER_SOUTH_CLOSET = Room("South Closet", 'MASTER_NORTH_CLOSET', None, None, No
                            "There's a box with blinking lights in the room.")
 MASTER_BATHROOM = Room("Master Bathroom", None, None, 'MASTER_HALLWAY', None, None, None,
                        "A shower and bath is visible. The water is running.")
-UPSTAIRS_HALLWAY_CONT = Room("Eastern Upstairs Hallway", 'UPSTAIRS_HALLWAY_NORTH', None, None, 'UPSTAIRS_HALLWAY',
-                             None, None, "East lies an unopened door. North continues the hallway.")
+UPSTAIRS_HALLWAY_CONT = Room("Eastern Upstairs Hallway", 'UPSTAIRS_HALLWAY_NORTH', None, 'KENNY_ROOM',
+                             'UPSTAIRS_HALLWAY', None, None, "East lies an unopened door. North continues the hallway.")
 UPSTAIRS_HALLWAY_NORTH = Room("North Upstairs Hallway", 'LILIE_ROOM', 'UPSTAIRS_HALLWAY_CONT', 'UPSTAIRS_BATHROOM',
                               None, None, None, "There's a doors leading to the North and East.")
 UPSTAIRS_BATHROOM = Room("Upstairs Bathroom", None, None, None, 'UPSTAIRS_HALLWAY_NORTH', None, None,
                          "The water to the sink and bath is turned on.")
 LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, None, None, "A barren room with a bed.")
-KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.")
+KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.",
+                  [], [RPG])
 
 player = Player(MAIN_DRIVEWAY)
 
 # Controller ===========================================================================================================
 
 directions = ['north', 'south', 'east', 'west', 'up', 'down']
-playing = True
+def pick_up():
+    command = input(">_")
+    player.inventory.append(command)
 
+playing = True
 
 while playing:
     print()
     print(player.current_location.name)
     print(player.current_location.description)
+    if len(player.current_location.character) > 0:
+        print("You whip out your Note 8 and kill it.")
     command = input(">_")
     if command.lower() in ['q', 'quit', 'exit']:
         playing = False
@@ -333,5 +337,3 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
-    if Character is None in MASTER_BALCONY.character:
-        print("It's empty")
