@@ -1,4 +1,3 @@
-import random
 from pprint import pprint
 
 
@@ -84,17 +83,6 @@ class Weapon(Item):
         self.role = role
         self.material = material
 
-    def attack(self):
-        print("You swung your sword and did %s damage" % self.damage)
-
-    @staticmethod
-    def parry():
-        chance = random.randint(0, 1)
-        if chance == 1:
-            print("You've successfully blocked the attack!")
-        else:
-            print("Lmao you dropped your Note 8 and the screen cracks. You die.")
-
 
 class Melee(Weapon):
     def __init__(self, name, value, damage, element, role, material, handedness):
@@ -106,19 +94,6 @@ class Shield(Melee):
     def __init__(self, name, damage, element, role, material, value, damage_block):
         super(Shield, self).__init__(name, damage, element, role, material, value, 1)
         self.damage_negation = damage_block
-
-    @staticmethod
-    def shield_block():
-        print("You raise your shield in a defensive position.")
-
-    @staticmethod
-    def shield_bash():
-        chance = random.randint(0, 1)
-        if chance == 1:
-            print("You charge with your shield, stunning the enemy.")
-        else:
-            print("You try charging forward, but your Note 8 falls out of your pocket and the back glass cracks. "
-                  "You die.")
 
 
 class Sword(Melee):
@@ -142,15 +117,6 @@ class Dagger(Melee):
     def __init__(self, name, value, damage, element, role, material, chance_bleed):
         super(Dagger, self).__init__(name, value, damage, element, role, material, handedness=False)
         self.chance_bleed = chance_bleed
-
-    @staticmethod
-    def stab():
-        chance = random.randint(0, 1)
-        if chance == 1:
-            print("You gave them a present from the back.")
-        else:
-            print("Your Note 8 lights up, and gives your position away. You try to turn it off, but an arrow "
-                  "comes by and cracks the screen. You die.")
 
 
 class Ranged(Weapon):
@@ -307,14 +273,12 @@ KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, Non
                   [], [RPG])
 
 player = Player(MAIN_DRIVEWAY)
-
+Kerry = Character('Player', 100, Repulsor, Diamond_Slides)
+Kerry.attack(Kerry)
 # Controller ===========================================================================================================
 
-directions = ['north', 'south', 'east', 'west', 'up', 'down']
-def pick_up():
-    command = input(">_")
-    player.inventory.append(command)
-
+command_list = ['north', 'south', 'east', 'west', 'up', 'down']
+fight_commands = ['attack']
 playing = True
 
 while playing:
@@ -323,17 +287,20 @@ while playing:
     print(player.current_location.description)
     if len(player.current_location.character) > 0:
         print("You whip out your Note 8 and kill it.")
-    command = input(">_")
-    if command.lower() in ['q', 'quit', 'exit']:
+    player_command = input(">_")
+    if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
-    elif command.lower() in directions:
+    elif player_command.lower() in command_list:
         try:
-            room_name = getattr(player.current_location, command)
+            room_name = getattr(player.current_location, player_command)
             room_object = globals()[room_name]
             player.move(room_object)
         except AttributeError:
             print("I can't go that way.")
         except KeyError:
             print("This key does not exist.")
+    if player_command in fight_commands:
+        enemy = input("Who do you want to fight?")
+        Kerry.attack(enemy)
     else:
         print("Command Not Recognized.")
