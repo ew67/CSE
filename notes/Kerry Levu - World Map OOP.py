@@ -1,4 +1,5 @@
 from pprint import pprint
+import random
 
 
 class Room(object):
@@ -159,11 +160,13 @@ class Magic(Ranged):
 
 
 class Character(object):
-    def __init__(self, name, health, weapon, armor):
+    def __init__(self, name, health, weapon, armor, starting_location):
         self.name = name
         self.health = health
         self.weapon = weapon
         self.armor = armor
+        self.inventory = []
+        self.current_location = starting_location
 
     def take_damage(self, damage):
         self.health -= damage
@@ -174,13 +177,6 @@ class Character(object):
         print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
         target.take_damage(self.weapon.damage)
         print("%s has %d health left" % (self.name, self.health))
-
-
-class Player(object):
-    def __init__(self, starting_location):
-        self.health = 100
-        self.current_location = starting_location
-        self.inventory = []
 
     def move(self, new_location):
         """This method moves a character to a new location
@@ -272,35 +268,46 @@ LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, No
 KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.",
                   [], [RPG])
 
-player = Player(MAIN_DRIVEWAY)
-Kerry = Character('Player', 100, Repulsor, Diamond_Slides)
-Kerry.attack(Kerry)
+Kerry = Character('Player', 100, Repulsor, Diamond_Slides, MAIN_DRIVEWAY)
+
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
-fight_commands = ['attack']
 playing = True
 
 while playing:
     print()
-    print(player.current_location.name)
-    print(player.current_location.description)
-    if len(player.current_location.character) > 0:
-        print("You whip out your Note 8 and kill it.")
+    print(Kerry.current_location.name)
+    print(Kerry.current_location.description)
+    if len(Kerry.current_location.character) > 0:
+        for character in Kerry.current_location.character:
+            print()
+            choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
+            if choice in command_list:
+                print("There's still a Monster in the room!")
+            if choice.lower() in ['no']:
+                chance = random.randint(0, 1)
+                if chance == 1:
+                    print("You tried to run, but it blocked the door!")
+                else:
+                    print("Which way do you want to escape?")
+                    continue
+            elif choice.lower() in ['yes']:
+                print("You've decided to fight the monster!")
+            else:
+                print("What's your choice?")
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif player_command.lower() in command_list:
         try:
-            room_name = getattr(player.current_location, player_command)
+            room_name = getattr(Kerry.current_location, player_command)
             room_object = globals()[room_name]
-            player.move(room_object)
+            Kerry.move(room_object)
         except AttributeError:
             print("I can't go that way.")
         except KeyError:
             print("This key does not exist.")
-    if player_command in fight_commands:
-        enemy = input("Who do you want to fight?")
-        Kerry.attack(enemy)
     else:
         print("Command Not Recognized.")
+
