@@ -17,11 +17,6 @@ class Room(object):
         self.items = items
 
 
-class Monster(object):
-    def __init__(self):
-        self.health = 100
-
-
 class Item(object):
     def __init__(self, name, value):
         self.Name = name
@@ -176,7 +171,7 @@ class Character(object):
     def attack(self, target):
         print("%s attacks %s for %d damage" % (self.name, target.name, self.weapon.damage))
         target.take_damage(self.weapon.damage)
-        print("%s has %d health left" % (self.name, self.health))
+        print("%s has %d health left" % (target.name, target.health))
 
     def move(self, new_location):
         """This method moves a character to a new location
@@ -204,19 +199,19 @@ Wood_Helmet = Helmet("Wood Helmet", 250, 25, "Wood")
 Iron_Chest = ChestPlate("Iron_Chest", 600, 100, "Iron")
 Gold_Leggings = Leggings("Gold Leggings", 500, 75, "Gold")
 Diamond_Slides = Boots("Diamond Slides", 1500, 1500, "Diamond")
-
+Generic_Sword = Sword("Iron Sword", 500, 12, None, None, None, 'Longsword', '2')
 
 # Characters
 # ======================================================================================================================
-Big_Scary_Man = Monster()
-
+Big_Scary_Man = Character("Big Scary Man", 100, Generic_Sword, None, None)
+Kyle = Character("Kyle", 100, Generic_Sword, None, None)
 # Rooms
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.")
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
-                    "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man], [])
+                    "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
 DOWNSTAIRS_HALLWAY = Room("Downstairs Hallway", 'MONIQUE_ROOM', 'WASHING_ROOM', 'DOWNSTAIRS_HALLWAY_CONT',
                           'KENDRICK_ROOM', None, None, "You're in a hallway. There's an old painting on the wall. "
                                                        "There's a door to your left. The hallway continues West.")
@@ -294,6 +289,9 @@ while playing:
                     continue
             elif choice.lower() in ['yes']:
                 print("You've decided to fight the monster!")
+                # print(Kerry.current_location.character)
+                for x in Kerry.current_location.character:
+                    Kerry.attack(x)
             else:
                 print("What's your choice?")
     player_command = input(">_")
@@ -310,4 +308,3 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
-
