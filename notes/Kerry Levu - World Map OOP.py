@@ -280,20 +280,23 @@ while playing:
             choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
             if choice in command_list:
                 print("There's still a Monster in the room!")
-            if choice.lower() in ['no']:
+            elif choice.lower() in ['yes']:
+                print("You've decided to fight the monster!")
+                for x in Kerry.current_location.character:
+                    Kerry.attack(x)
+                    continue
+            elif choice.lower() in ['no']:
                 chance = random.randint(0, 1)
                 if chance == 1:
                     print("You tried to run, but it blocked the door!")
-                else:
-                    print("Which way do you want to escape?")
+                    print()
+                    print("You now have to fight it!")
+                    for x in Kerry.current_location.character:
+                        Kerry.attack(x)
                     continue
-            elif choice.lower() in ['yes']:
-                print("You've decided to fight the monster!")
-                # print(Kerry.current_location.character)
-                for x in Kerry.current_location.character:
-                    Kerry.attack(x)
             else:
-                print("What's your choice?")
+                print("Which way do you want to escape?")
+                continue
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
