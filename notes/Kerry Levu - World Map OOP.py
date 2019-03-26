@@ -19,8 +19,8 @@ class Room(object):
 
 class Item(object):
     def __init__(self, name, value):
-        self.Name = name
-        self.Value = value
+        self.name = name
+        self.value = value
 
 
 class Armor(Item):
@@ -82,7 +82,7 @@ class Weapon(Item):
 
 class Melee(Weapon):
     def __init__(self, name, value, damage, element, role, material, handedness):
-        super(Melee, self).__init__(name, value, damage, element, role, material)
+        super(Melee, self).__init__(name, damage, element, role, material, value)
         self.handedness = handedness
 
 
@@ -180,6 +180,9 @@ class Character(object):
         """
         self.current_location = new_location
 
+    def pick_up(self, item):
+        self.inventory.append(item)
+
 
 # Items
 # ======================================================================================================================
@@ -188,7 +191,7 @@ RPG = RocketLauncher("RPG", 1000, 50, "Fire", "Demo", "Iron", "Rockets", 3, 2, .
 Zeus = Gun("Zeus", 50, 12, "Electricity", "Ranged", "Iron", "Electric_Bullet", 5, 30, 5)
 V_Power = Bow("rewoP_V", 3000, 67, None, "Ranged", "Wood", "Arrows", 6, 1)
 Caltrops = Throwable("Spikes", 50, 5, "Iron", 1, 5)
-Karyst = Dagger("Karyst", 1500, 34, "Toxin", "Assassin", "Moon_Rock", 35)
+Karyst = Dagger("Karyst", 0, 34, "Toxin", "Assassin", "Moon_Rock", 35)
 Matterbul = Whip("Materbul", 1700, 43, None, None, "Leather", 8)
 Maciella = Mace("Maciella", 2500, 70, None, None, "Cobalt", 2)
 Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword", 1)
@@ -205,6 +208,7 @@ Generic_Sword = Sword("Iron Sword", 500, 12, None, None, None, 'Longsword', '2')
 # ======================================================================================================================
 Big_Scary_Man = Character("Big Scary Man", 100, Generic_Sword, None, None)
 Kyle = Character("Kyle", 100, Generic_Sword, None, None)
+
 # Rooms
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
@@ -262,9 +266,8 @@ UPSTAIRS_BATHROOM = Room("Upstairs Bathroom", None, None, None, 'UPSTAIRS_HALLWA
 LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, None, None, "A barren room with a bed.")
 KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.",
                   [], [RPG])
-
-Kerry = Character('Player', 100, Repulsor, Diamond_Slides, MAIN_DRIVEWAY)
-
+# Player ===============================================================================================================
+Player = Character('Paper', 100, Karyst, Diamond_Slides, MAIN_DRIVEWAY)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -272,39 +275,44 @@ playing = True
 
 while playing:
     print()
-    print(Kerry.current_location.name)
-    print(Kerry.current_location.description)
-    if len(Kerry.current_location.character) > 0:
-        for character in Kerry.current_location.character:
-            print()
-            choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
-            if choice in command_list:
-                print("There's still a Monster in the room!")
-            elif choice.lower() in ['yes']:
-                print("You've decided to fight the monster!")
-                for x in Kerry.current_location.character:
-                    Kerry.attack(x)
+    print(Player.current_location.name)
+    print(Player.current_location.description)
+    # if Player.current_location.items > 0:
+
+    if len(Player.current_location.character) > 0:
+        for character in Player.current_location.character:
+            while character.health > 0:
+                print()
+                choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
+                if choice in command_list:
+                    print("There's still a Monster in the room!")
+                elif choice.lower() in ['yes']:
+                    print("You've decided to fight the monster!")
+                    for x in Player.current_location.character:
+                        Player.attack(x)
+                        print()
+                        x.attack(Player)
+                        continue
+                elif choice.lower() in ['no']:
+                    chance = random.randint(0, 1)
+                    if chance == 1:
+                        print("You tried to run, but it blocked the door!")
+                        print()
+                        print("You now have to fight it!")
+                        for x in Player.current_location.character:
+                            Player.attack(x)
+                            x.attack(Player)
+                        continue
+                else:
                     continue
-            elif choice.lower() in ['no']:
-                chance = random.randint(0, 1)
-                if chance == 1:
-                    print("You tried to run, but it blocked the door!")
-                    print()
-                    print("You now have to fight it!")
-                    for x in Kerry.current_location.character:
-                        Kerry.attack(x)
-                    continue
-            else:
-                print("Which way do you want to escape?")
-                continue
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif player_command.lower() in command_list:
         try:
-            room_name = getattr(Kerry.current_location, player_command)
+            room_name = getattr(Player.current_location, player_command)
             room_object = globals()[room_name]
-            Kerry.move(room_object)
+            Player.move(room_object)
         except AttributeError:
             print("I can't go that way.")
         except KeyError:
