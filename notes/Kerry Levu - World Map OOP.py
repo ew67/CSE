@@ -4,7 +4,11 @@ import random
 
 class Room(object):
     def __init__(self, name, north=None, south=None, east=None, west=None, up=None, down=None, description="",
-                 characters=[], items=[]):
+                 characters=None, items=None):
+        if items is None:
+            items = []
+        if characters is None:
+            characters = []
         self.name = name
         self.north = north
         self.south = south
@@ -15,6 +19,7 @@ class Room(object):
         self.description = description
         self.character = characters
         self.items = items
+        self.escape = False
 
 
 class Item(object):
@@ -268,6 +273,11 @@ KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, Non
                   [], [RPG])
 # Player ===============================================================================================================
 Player = Character('Paper', 100, Karyst, Diamond_Slides, MAIN_DRIVEWAY)
+Player.pick_up(Zeus)
+print(Player.inventory)
+print(list(Player.inventory))
+Inventory = ['Zeus']
+print(Inventory)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -279,20 +289,21 @@ while playing:
     print(Player.current_location.description)
     # if Player.current_location.items > 0:
 
-    if len(Player.current_location.character) > 0:
+    if len(Player.current_location.character) > 0 and:
         for character in Player.current_location.character:
-            while character.health > 0:
+            while character.health > 0 or Player.health == 0 or not Player.current_location.escape :
                 print()
                 choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
+                print()
                 if choice in command_list:
                     print("There's still a Monster in the room!")
                 elif choice.lower() in ['yes']:
                     print("You've decided to fight the monster!")
+                    print()
                     for x in Player.current_location.character:
                         Player.attack(x)
                         print()
                         x.attack(Player)
-                        continue
                 elif choice.lower() in ['no']:
                     chance = random.randint(0, 1)
                     if chance == 1:
@@ -301,10 +312,11 @@ while playing:
                         print("You now have to fight it!")
                         for x in Player.current_location.character:
                             Player.attack(x)
+                            print()
                             x.attack(Player)
-                        continue
-                else:
-                    continue
+                    else:
+                        Player.current_location.escape = True
+
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
