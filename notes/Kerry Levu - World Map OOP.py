@@ -217,7 +217,8 @@ Kyle = Character("Kyle", 100, Generic_Sword, None, None)
 # Rooms
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
-                     "You're outside. There are cars in front of you. The garage is slightly opened.")
+                     "You're outside. There are cars in front of you. The garage is slightly opened.", [],
+                     [Generic_Sword])
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
                     "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
@@ -273,25 +274,24 @@ KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, Non
                   [], [RPG])
 # Player ===============================================================================================================
 Player = Character('Paper', 100, Karyst, Diamond_Slides, MAIN_DRIVEWAY)
-Player.pick_up(Zeus)
-print(Player.inventory)
-print(list(Player.inventory))
-Inventory = ['Zeus']
-print(Inventory)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
 playing = True
 
 while playing:
+    # Location Check ===================================================================================================
     print()
     print(Player.current_location.name)
     print(Player.current_location.description)
-    # if Player.current_location.items > 0:
-
-    if len(Player.current_location.character) > 0 and:
-        for character in Player.current_location.character:
-            while character.health > 0 or Player.health == 0 or not Player.current_location.escape :
+    # Item Check =======================================================================================================
+    if len(Player.current_location.items) > 0:
+        for items in Player.current_location.items:
+            print("There is a %s in this room." % items.name)
+    # Combat Check =====================================================================================================
+    if len(Player.current_location.character) > 0:
+        for character in Player.current_location.character or not Player.current_location.escape is False:
+            while character.health > 0 or Player.health == 0:
                 print()
                 choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
                 print()
@@ -304,9 +304,15 @@ while playing:
                         Player.attack(x)
                         print()
                         x.attack(Player)
+                        if character.health == 0:
+                            print("You've successfully slain all the monsters!")
+                            print(Player.current_location.name)
+                            print(Player.current_location.description)
+                        if Player.health == 0:
+                            print("You've died.")
                 elif choice.lower() in ['no']:
                     chance = random.randint(0, 1)
-                    if chance == 1:
+                    if chance == 0:
                         print("You tried to run, but it blocked the door!")
                         print()
                         print("You now have to fight it!")
@@ -314,9 +320,13 @@ while playing:
                             Player.attack(x)
                             print()
                             x.attack(Player)
+                            if character.health == 0:
+                                print("You've successfully slain all the monsters!")
+                            if Player.health == 0:
+                                print("You've died.")
                     else:
                         Player.current_location.escape = True
-
+    # Movement & Command Input =========================================================================================
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
