@@ -288,10 +288,12 @@ while playing:
     if len(Player.current_location.items) > 0:
         for items in Player.current_location.items:
             print("There is a %s in this room." % items.name)
+
+
     # Combat Check =====================================================================================================
     if len(Player.current_location.character) > 0:
-        for character in Player.current_location.character or not Player.current_location.escape is False:
-            while character.health > 0 or Player.health == 0:
+        for character in Player.current_location.character:
+            while (character.health > 0 or Player.health == 0) and not Player.current_location.escape:
                 print()
                 choice = input("There's a monster here! Do you wish to fight it or run? Yes or No?")
                 print()
@@ -304,10 +306,9 @@ while playing:
                         Player.attack(x)
                         print()
                         x.attack(Player)
-                        if character.health == 0:
-                            print("You've successfully slain all the monsters!")
-                            print(Player.current_location.name)
-                            print(Player.current_location.description)
+                        if x.health == 0:
+                            print("You've successfully slain this monster!")
+                            print()
                         if Player.health == 0:
                             print("You've died.")
                 elif choice.lower() in ['no']:
@@ -325,6 +326,7 @@ while playing:
                             if Player.health == 0:
                                 print("You've died.")
                     else:
+                        print("You successfully escape")
                         Player.current_location.escape = True
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
