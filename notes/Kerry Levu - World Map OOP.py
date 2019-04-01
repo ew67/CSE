@@ -288,7 +288,13 @@ while playing:
     if len(Player.current_location.items) > 0:
         for items in Player.current_location.items:
             print("There is a %s in this room." % items.name)
-
+            choice = input("Do you want to pick this item up?")
+            if choice.lower() in "yes":
+                Player.inventory.append(items)
+                Player.current_location.items.remove(items)
+                print(Player.inventory.)
+            else:
+                print("You decide to not pick the item up.")
 
     # Combat Check =====================================================================================================
     if len(Player.current_location.character) > 0:
@@ -309,6 +315,8 @@ while playing:
                         if x.health == 0:
                             print("You've successfully slain this monster!")
                             print()
+                            print(Player.current_location.name)
+                            print(Player.current_location.description)
                         if Player.health == 0:
                             print("You've died.")
                 elif choice.lower() in ['no']:
@@ -328,6 +336,9 @@ while playing:
                     else:
                         print("You successfully escape")
                         Player.current_location.escape = True
+                        print()
+                        print(Player.current_location.name)
+                        print(Player.current_location.description)
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
     if player_command.lower() in ['q', 'quit', 'exit']:

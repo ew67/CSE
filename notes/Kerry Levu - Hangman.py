@@ -16,7 +16,6 @@ win = 0
 answer_hidden = []
 punctuation_list = list(string.punctuation + " ")
 
-
 def index_of(word, letter, starting_index):
     """Finds an index starting at a given point
     @:return the index of the next instance
