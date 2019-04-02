@@ -188,6 +188,14 @@ class Character(object):
     def pick_up(self, item):
         self.inventory.append(item)
 
+    def inventory_check(self):
+        string_inventory = []
+        for item in self.inventory:
+            string_inventory.append(item.name)
+            print(string_inventory)
+        if "'" in string_inventory:
+            string_inventory.remove("'")
+
 
 # Items
 # ======================================================================================================================
@@ -218,7 +226,7 @@ Kyle = Character("Kyle", 100, Generic_Sword, None, None)
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.", [],
-                     [Generic_Sword])
+                     [Generic_Sword, Wood_Helmet])
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
                     "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
@@ -292,7 +300,8 @@ while playing:
             if choice.lower() in "yes":
                 Player.inventory.append(items)
                 Player.current_location.items.remove(items)
-                print(Player.inventory.)
+                print(Player.current_location.items)
+                Player.inventory_check()
             else:
                 print("You decide to not pick the item up.")
 
