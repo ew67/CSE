@@ -190,14 +190,13 @@ class Character(object):
 
     def inventory_check(self):
         if len(self.inventory) > 1:
-            print("You have this in your inventory: [", end=", ")
+            print("You have this in your inventory: [", end="")
         else:
-            print("You have this in your inventory: [", end=" ")
+            print("You have this in your inventory: [", end="")
         for item_index in range(len(self.inventory) - 1):
             print(self.inventory[item_index].name, end=", ")
         print(self.inventory[len(self.inventory) - 1].name + "]")
         print()
-
 
 
 # Items
@@ -297,15 +296,21 @@ while playing:
     print(Player.current_location.description)
     # Item Check =======================================================================================================
     if len(Player.current_location.items) > 0:
-        for items in Player.current_location.items:
-            print("There is a %s in this room." % items.name)
+        items_index = 0
+        while items_index < len(Player.current_location.items):
+            print(Player.current_location.items)
+            print("There is a %s in this room." % Player.current_location.items[items_index].name)
+            print()
             choice = input("Do you want to pick this item up?")
             if choice.lower() in "yes":
-                Player.inventory.append(items)
-                Player.current_location.items.remove(items)
+                print()
+                print("You've picked up the %s." % Player.current_location.items[items_index])
+                Player.inventory.append(Player.current_location.items[items_index])
+                Player.current_location.items.remove(Player.current_location.items[items_index])
                 Player.inventory_check()
             else:
                 print("You decide to not pick the item up.")
+                items_index += 1
 
     # Combat Check =====================================================================================================
     if len(Player.current_location.character) > 0:
