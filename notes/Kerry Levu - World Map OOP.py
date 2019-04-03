@@ -189,12 +189,15 @@ class Character(object):
         self.inventory.append(item)
 
     def inventory_check(self):
-        string_inventory = []
-        for item in self.inventory:
-            string_inventory.append(item.name)
-            print(string_inventory)
-        if "'" in string_inventory:
-            string_inventory.remove("'")
+        if len(self.inventory) > 1:
+            print("You have this in your inventory: [", end=", ")
+        else:
+            print("You have this in your inventory: [", end=" ")
+        for item_index in range(len(self.inventory) - 1):
+            print(self.inventory[item_index].name, end=", ")
+        print(self.inventory[len(self.inventory) - 1].name + "]")
+        print()
+
 
 
 # Items
@@ -300,7 +303,6 @@ while playing:
             if choice.lower() in "yes":
                 Player.inventory.append(items)
                 Player.current_location.items.remove(items)
-                print(Player.current_location.items)
                 Player.inventory_check()
             else:
                 print("You decide to not pick the item up.")
