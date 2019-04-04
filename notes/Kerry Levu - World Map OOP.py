@@ -1,4 +1,3 @@
-from pprint import pprint
 import random
 
 
@@ -71,9 +70,10 @@ class Potions(Consumable):
 
 
 class Food(Consumable):
-    def __init__(self, name, value, durability, buff):
+    def __init__(self, name, value, durability, buff, heal_amount):
         super(Food, self).__init__(name, value, durability)
         self.buff = buff
+        self.heal_amount = heal_amount
 
 
 class Weapon(Item):
@@ -160,13 +160,16 @@ class Magic(Ranged):
 
 
 class Character(object):
-    def __init__(self, name, health, weapon, armor, starting_location):
+    def __init__(self, name, health, weapon, starting_location, helmet, chestplate, pants, boots):
         self.name = name
         self.health = health
         self.weapon = weapon
-        self.armor = armor
         self.inventory = []
         self.current_location = starting_location
+        self.helmet = helmet
+        self.chestplate = chestplate
+        self.pants = pants
+        self.boots = boots
 
     def take_damage(self, damage):
         self.health -= damage
@@ -185,23 +188,25 @@ class Character(object):
         """
         self.current_location = new_location
 
-    def pick_up(self, item):
-        self.inventory.append(item)
-
     def inventory_check(self):
-        if len(self.inventory) > 1:
-            print("You have this in your inventory: [", end="")
-        else:
-            print("You have this in your inventory: [", end="")
-        for item_index in range(len(self.inventory) - 1):
-            print(self.inventory[item_index].name, end=", ")
-        print(self.inventory[len(self.inventory) - 1].name + "]")
-        print()
-
+        try:
+            if len(self.inventory) == 0:
+                raise IndexError
+            elif len(self.inventory) > 1:
+                print("Inventory: [", end="")
+            else:
+                print("Inventory: [", end="")
+            for item_index in range(len(self.inventory) - 1):
+                print(self.inventory[item_index].name, end=", ")
+            print(self.inventory[len(self.inventory) - 1].name + "]")
+            print()
+        except IndexError:
+            print("You have nothing in your inventory.")
 
 # Items
 # ======================================================================================================================
 Meteor_Rod = Magic("Meteor Rod", 1000, 24, "Earth", "Mage", "Moon_Rock", 3, 2, 5, "Meteor")
+
 RPG = RocketLauncher("RPG", 1000, 50, "Fire", "Demo", "Iron", "Rockets", 3, 2, .5)
 Zeus = Gun("Zeus", 50, 12, "Electricity", "Ranged", "Iron", "Electric_Bullet", 5, 30, 5)
 V_Power = Bow("rewoP_V", 3000, 67, None, "Ranged", "Wood", "Arrows", 6, 1)
@@ -212,23 +217,25 @@ Maciella = Mace("Maciella", 2500, 70, None, None, "Cobalt", 2)
 Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword", 1)
 Stanford = Shield("Stanford", 15, None, "Knight", "Tin", 500, 10)
 Health_Potion = Potions("Health Pot", 50, "1", 50, 10)
-Cake = Food("Cake", 100, 5, "Well Fed")
+Cake = Food("Cake", 100, 5, "Well Fed", 15)
 Wood_Helmet = Helmet("Wood Helmet", 250, 25, "Wood")
 Iron_Chest = ChestPlate("Iron_Chest", 600, 100, "Iron")
 Gold_Leggings = Leggings("Gold Leggings", 500, 75, "Gold")
 Diamond_Slides = Boots("Diamond Slides", 1500, 1500, "Diamond")
 Generic_Sword = Sword("Iron Sword", 500, 12, None, None, None, 'Longsword', '2')
+Death_Food = Food("Food", 0, 1, None, -100)
+
 
 # Characters
 # ======================================================================================================================
-Big_Scary_Man = Character("Big Scary Man", 100, Generic_Sword, None, None)
-Kyle = Character("Kyle", 100, Generic_Sword, None, None)
+Big_Scary_Man = Character("Big Scary Man", 100, Generic_Sword, None, None, None, None, None)
+Kyle = Character("Kyle", 100, Generic_Sword, None, None, None, None, None)
 
 # Rooms
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.", [],
-                     [Generic_Sword, Wood_Helmet])
+                     [Generic_Sword, Generic_Sword])
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
                     "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
@@ -249,7 +256,7 @@ DOWNSTAIRS_LIVING_ROOM = Room("Downstairs Living Room", None, 'DOWNSTAIRS_STAIRW
 DINING_ROOM = Room("Dining Room", None, 'KITCHEN', None, 'DOWNSTAIRS_LIVING_ROOM', None, None,
                    "There's fresh food lying on the table!")
 KITCHEN = Room("Kitchen", 'DINING_ROOM', None, None, None, None, None,
-               "Here lies more food. A few fruits and raw fish. There's a knife.")
+               "Here lies more food. A few fruits and raw fish. There's a knife.", [], [Death_Food])
 DOWNSTAIRS_STAIRWELL = Room("Downstairs Stairwell", 'DOWNSTAIRS_LIVING_ROOM', None, None, None, 'UPSTAIRS_STAIRWELL',
                             None, "The stairwell leads up.")
 UPSTAIRS_STAIRWELL = Room("Upstairs Stairwell", 'UPSTAIRS_HALLWAY', None, None, None, None, 'DOWNSTAIRS_STAIRWELL',
@@ -283,7 +290,7 @@ LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, No
 KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.",
                   [], [RPG])
 # Player ===============================================================================================================
-Player = Character('Paper', 100, Karyst, Diamond_Slides, MAIN_DRIVEWAY)
+Player = Character('Paper', 100, Karyst, MAIN_DRIVEWAY, None, None, None, None)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -298,18 +305,22 @@ while playing:
     if len(Player.current_location.items) > 0:
         items_index = 0
         while items_index < len(Player.current_location.items):
-            print(Player.current_location.items)
+            print()
             print("There is a %s in this room." % Player.current_location.items[items_index].name)
             print()
             choice = input("Do you want to pick this item up?")
             if choice.lower() in "yes":
                 print()
-                print("You've picked up the %s." % Player.current_location.items[items_index])
+                print("You've picked up the %s." % Player.current_location.items[items_index].name)
                 Player.inventory.append(Player.current_location.items[items_index])
                 Player.current_location.items.remove(Player.current_location.items[items_index])
                 Player.inventory_check()
             else:
+                print()
                 print("You decide to not pick the item up.")
+                print()
+                print(Player.current_location.name)
+                print(Player.current_location.description)
                 items_index += 1
 
     # Combat Check =====================================================================================================
@@ -355,9 +366,12 @@ while playing:
                         print()
                         print(Player.current_location.name)
                         print(Player.current_location.description)
+
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
-    if player_command.lower() in ['q', 'quit', 'exit']:
+    if player_command.lower() in ['inventory', 'check inventory']:
+        Player.inventory_check()
+    elif player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif player_command.lower() in command_list:
         try:
@@ -370,3 +384,7 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
+
+
+
+
