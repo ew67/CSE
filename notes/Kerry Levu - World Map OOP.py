@@ -203,6 +203,7 @@ class Character(object):
         except IndexError:
             print("You have nothing in your inventory.")
 
+
 # Items
 # ======================================================================================================================
 Meteor_Rod = Magic("Meteor Rod", 1000, 24, "Earth", "Mage", "Moon_Rock", 3, 2, 5, "Meteor")
@@ -254,9 +255,9 @@ DOWNSTAIRS_BATHROOM = Room("Downstairs Bathroom", 'DOWNSTAIRS_HALLWAY_CONT', Non
 DOWNSTAIRS_LIVING_ROOM = Room("Downstairs Living Room", None, 'DOWNSTAIRS_STAIRWELL', 'DINING_ROOM',
                               'DOWNSTAIRS_HALLWAY_CONT', None, None, "You're in a Living Room.")
 DINING_ROOM = Room("Dining Room", None, 'KITCHEN', None, 'DOWNSTAIRS_LIVING_ROOM', None, None,
-                   "There's fresh food lying on the table!")
+                   "There's fresh food lying on the table!", [], [Death_Food])
 KITCHEN = Room("Kitchen", 'DINING_ROOM', None, None, None, None, None,
-               "Here lies more food. A few fruits and raw fish. There's a knife.", [], [Death_Food])
+               "Here lies more food. A few fruits and raw fish. There's a knife.", [], [])
 DOWNSTAIRS_STAIRWELL = Room("Downstairs Stairwell", 'DOWNSTAIRS_LIVING_ROOM', None, None, None, 'UPSTAIRS_STAIRWELL',
                             None, "The stairwell leads up.")
 UPSTAIRS_STAIRWELL = Room("Upstairs Stairwell", 'UPSTAIRS_HALLWAY', None, None, None, None, 'DOWNSTAIRS_STAIRWELL',
@@ -369,8 +370,18 @@ while playing:
 
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
+    if player_command.lower() in ['equip']:
+        print("Lol")
+        list_command = list(player_command)
+        index_command = list_command[5:]
+        if index_command in Player.inventory:
+            print("Test")
     if player_command.lower() in ['inventory', 'check inventory']:
         Player.inventory_check()
+    if Death_Food in Player.inventory:
+        print("You've died from eating the poisoned food.")
+        Player.health = 0
+        playing = False
     elif player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif player_command.lower() in command_list:
@@ -384,7 +395,3 @@ while playing:
             print("This key does not exist.")
     else:
         print("Command Not Recognized.")
-
-
-
-
