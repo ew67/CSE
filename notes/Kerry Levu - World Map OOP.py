@@ -295,6 +295,7 @@ Player = Character('Paper', 100, Karyst, MAIN_DRIVEWAY, None, None, None, None)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
+short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 playing = True
 
 while playing:
@@ -316,6 +317,10 @@ while playing:
                 Player.inventory.append(Player.current_location.items[items_index])
                 Player.current_location.items.remove(Player.current_location.items[items_index])
                 Player.inventory_check()
+                if Death_Food in Player.inventory:
+                    print("You've died from eating the poisoned food.")
+                    Player.health = 0
+                    playing = False
             else:
                 print()
                 print("You decide to not pick the item up.")
@@ -370,18 +375,18 @@ while playing:
 
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
+    if player_command in short_directions:
+        pos = short_directions.index(player_command.lower())
+        player_command = command_list[pos]
+
     if player_command.lower() in ['equip']:
         print("Lol")
         list_command = list(player_command)
-        index_command = list_command[5:]
-        if index_command in Player.inventory:
+        print(list_command[5:])
+        if list_command in Player.inventory:
             print("Test")
     if player_command.lower() in ['inventory', 'check inventory']:
         Player.inventory_check()
-    if Death_Food in Player.inventory:
-        print("You've died from eating the poisoned food.")
-        Player.health = 0
-        playing = False
     elif player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
     elif player_command.lower() in command_list:
