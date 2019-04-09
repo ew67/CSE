@@ -375,16 +375,19 @@ while playing:
 
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
-    if player_command in short_directions:
+    if player_command.lower() in short_directions:
         pos = short_directions.index(player_command.lower())
         player_command = command_list[pos]
 
-    if player_command.lower() in ['equip']:
+    if 'drop' in player_command.lower():
+            str = player_command[5:]
+            Player.inventory_check()
+            Player.current_location.items.append(player_command)
+            Player.inventory.remove(player_command)
+    if 'equip' in player_command.lower():
         print("Lol")
-        list_command = list(player_command)
-        print(list_command[5:])
-        if list_command in Player.inventory:
-            print("Test")
+        str = player_command[6:]
+        print(Player.inventory.index(str))
     if player_command.lower() in ['inventory', 'check inventory']:
         Player.inventory_check()
     elif player_command.lower() in ['q', 'quit', 'exit']:
