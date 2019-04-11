@@ -188,6 +188,10 @@ class Character(object):
         """
         self.current_location = new_location
 
+    def status_check(self):
+        
+
+
     def inventory_check(self):
         try:
             if len(self.inventory) == 0:
@@ -236,7 +240,7 @@ Kyle = Character("Kyle", 100, Generic_Sword, None, None, None, None, None)
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. There are cars in front of you. The garage is slightly opened.", [],
-                     [Generic_Sword])
+                     [Generic_Sword, Diamond_Slides])
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
                     "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
@@ -378,17 +382,36 @@ while playing:
     if player_command.lower() in short_directions:
         pos = short_directions.index(player_command.lower())
         player_command = command_list[pos]
+    elif 'status' in player_command.lower():
 
-    if 'drop' in player_command.lower():
+    elif 'drop' in player_command.lower():
             str = player_command[5:]
             Player.inventory_check()
             Player.current_location.items.append(player_command)
             Player.inventory.remove(player_command)
-    if 'equip' in player_command.lower():
-        print("Lol")
+    elif 'equip' in player_command.lower():
         str = player_command[6:]
-        print(Player.inventory.index(str))
-    if player_command.lower() in ['inventory', 'check inventory']:
+        item = None
+        for thing in Player.inventory:
+            if thing.name.lower() == str.lower():
+                item = thing
+        if isinstance(item, Weapon):
+            Player.weapon = item
+            print("Equipped %s" % Player.weapon.name)
+        if isinstance(item, Helmet):
+            Player.helmet = item
+            print("Equipped %s" % Player.helmet.name)
+        if isinstance(item, ChestPlate):
+            Player.chestplate = item
+            print("Equipped %s" % Player.chestplate.name)
+        if isinstance(item, Leggings):
+            Player.pants = item
+            print("Equipped %s" % Player.pants.name)
+        if isinstance(item, Boots):
+            Player.boots = item
+            print("Equipped %s" % Player.boots.name)
+
+    elif player_command.lower() in ['inventory', 'check inventory']:
         Player.inventory_check()
     elif player_command.lower() in ['q', 'quit', 'exit']:
         playing = False
