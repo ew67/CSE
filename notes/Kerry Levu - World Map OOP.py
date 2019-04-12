@@ -189,9 +189,13 @@ class Character(object):
         self.current_location = new_location
 
     def status_check(self):
-        
-
-
+            print("HP: %d " % self.health)
+            print("Weapon: %s " % self.weapon.name)
+            print(self.inventory_check())
+            print("Helmet: %s" % self.helmet)
+            print("Chestplate: %s" % self.chestplate)
+            print("Pants: %s" % self.pants)
+            print("Boots: %s" % self.boots.name)
     def inventory_check(self):
         try:
             if len(self.inventory) == 0:
@@ -203,7 +207,6 @@ class Character(object):
             for item_index in range(len(self.inventory) - 1):
                 print(self.inventory[item_index].name, end=", ")
             print(self.inventory[len(self.inventory) - 1].name + "]")
-            print()
         except IndexError:
             print("You have nothing in your inventory.")
 
@@ -383,6 +386,7 @@ while playing:
         pos = short_directions.index(player_command.lower())
         player_command = command_list[pos]
     elif 'status' in player_command.lower():
+        Player.status_check()
 
     elif 'drop' in player_command.lower():
             str = player_command[5:]
