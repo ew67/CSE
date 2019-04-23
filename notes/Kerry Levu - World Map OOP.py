@@ -189,13 +189,17 @@ class Character(object):
         self.current_location = new_location
 
     def status_check(self):
+        try:
             print("HP: %d " % self.health)
             print("Weapon: %s " % self.weapon.name)
             print(self.inventory_check())
-            print("Helmet: %s" % self.helmet)
-            print("Chestplate: %s" % self.chestplate)
-            print("Pants: %s" % self.pants)
+            print("Helmet: %s" % self.helmet.name)
+            print("Chestplate: %s" % self.chestplate.name)
+            print("Pants: %s" % self.pants.name)
             print("Boots: %s" % self.boots.name)
+        except AttributeError:
+            print("%s" % 'none')
+
     def inventory_check(self):
         try:
             if len(self.inventory) == 0:
@@ -242,9 +246,10 @@ Kyle = Character("Kyle", 100, Generic_Sword, None, None, None, None, None)
 # Rooms
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
-                     "You're outside. There are cars in front of you. The garage is slightly opened.", [],
-                     [Generic_Sword, Diamond_Slides])
-HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "The garage is empty.")
+                     "You're outside. To the North is a slightly opened Garage.", [],
+                     [])
+HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "North of you is a door."
+                    "The first thing you notice in the Garage is the keys.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
                     "There's a dryer and washing machine. Nearby a cabinet is open.", [Big_Scary_Man, Kyle], [])
 DOWNSTAIRS_HALLWAY = Room("Downstairs Hallway", 'MONIQUE_ROOM', 'WASHING_ROOM', 'DOWNSTAIRS_HALLWAY_CONT',
@@ -304,8 +309,20 @@ Player = Character('Paper', 100, Karyst, MAIN_DRIVEWAY, None, None, None, None)
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
 short_directions = ['n', 's', 'e', 'w', 'u', 'd']
 playing = True
-
+tutorial_state = False
 while playing:
+    # Tutorial Check ===================================================================================================
+
+    while tutorial_state is False:
+        player_command = input("Do you want a tutorial?")
+        if 'yes' in player_command.lower():
+            tutorial_state = True
+            print("This is a text-based adventure game.")
+            print("To move around, you can type in the 4 cardinal directions: North, South, East, and West. \n"
+                  "You're able to shorten the movement to the first letter of the directions.")
+            print("Typing in 'status' in the commandline will present you all your statistics.")
+        else:
+            print("You may play the game.")
     # Location Check ===================================================================================================
     print()
     print(Player.current_location.name)
@@ -379,7 +396,6 @@ while playing:
                         print()
                         print(Player.current_location.name)
                         print(Player.current_location.description)
-
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
     if player_command.lower() in short_directions:
@@ -387,7 +403,6 @@ while playing:
         player_command = command_list[pos]
     elif 'status' in player_command.lower():
         Player.status_check()
-
     elif 'drop' in player_command.lower():
             str = player_command[5:]
             Player.inventory_check()
