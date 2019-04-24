@@ -198,7 +198,7 @@ class Character(object):
             print("Pants: %s" % self.pants.name)
             print("Boots: %s" % self.boots.name)
         except AttributeError:
-            print("%s" % 'none')
+            print("%s" % 'None')
 
     def inventory_check(self):
         try:
