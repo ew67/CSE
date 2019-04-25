@@ -401,26 +401,28 @@ while playing:
     if player_command.lower() in short_directions:
         pos = short_directions.index(player_command.lower())
         player_command = command_list[pos]
-    elif  'use' in player_command.lower():
-        str = player_command[6:]
+    elif 'use' in player_command.lower():
+        key_str = player_command[6:]
         item = None
         for thing in Player.inventory:
-            if thing.name.lower() == str.lower():
+            if thing.name.lower() == key_str.lower():
                 item = thing
             if isinstance(item, Potions):
-                
+                Player.health = item.heal_amount + Player.health
+                if Player.health > 100:
+                    Player.health = 100
     elif 'status' in player_command.lower():
         Player.status_check()
     elif 'drop' in player_command.lower():
-            str = player_command[5:]
+            key_str = player_command[5:]
             Player.inventory_check()
             Player.current_location.items.append(player_command)
             Player.inventory.remove(player_command)
     elif 'equip' in player_command.lower():
-        str = player_command[6:]
+        key_str = player_command[6:]
         item = None
         for thing in Player.inventory:
-            if thing.name.lower() == str.lower():
+            if thing.name.lower() == key_str.lower():
                 item = thing
         if isinstance(item, Weapon):
             Player.weapon = item
