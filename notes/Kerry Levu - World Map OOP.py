@@ -401,6 +401,14 @@ while playing:
     if player_command.lower() in short_directions:
         pos = short_directions.index(player_command.lower())
         player_command = command_list[pos]
+    elif  'use' in player_command.lower():
+        str = player_command[6:]
+        item = None
+        for thing in Player.inventory:
+            if thing.name.lower() == str.lower():
+                item = thing
+            if isinstance(item, Potions):
+                
     elif 'status' in player_command.lower():
         Player.status_check()
     elif 'drop' in player_command.lower():
