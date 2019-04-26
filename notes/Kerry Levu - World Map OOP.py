@@ -247,7 +247,7 @@ Kyle = Character("Kyle", 100, Generic_Sword, None, None, None, None, None)
 # ======================================================================================================================
 MAIN_DRIVEWAY = Room("Main Driveway", 'HOUSE_GARAGE', None, None, None, None, None,
                      "You're outside. To the North is a slightly opened Garage.", [],
-                     [])
+                     [RPG])
 HOUSE_GARAGE = Room("Garage", 'WASHING_ROOM', 'MAIN_DRIVEWAY', None, None, None, None, "North of you is a door."
                     "The first thing you notice in the Garage is the keys.")
 WASHING_ROOM = Room("Washing Room", 'DOWNSTAIRS_HALLWAY', 'HOUSE_GARAGE', None, None, None, None,
@@ -322,6 +322,7 @@ while playing:
                   "You're able to shorten the movement to the first letter of the directions.")
             print("Typing in 'status' in the commandline will present you all your statistics.")
         else:
+            tutorial_state = True
             print("You may play the game.")
     # Location Check ===================================================================================================
     print()
@@ -414,10 +415,10 @@ while playing:
     elif 'status' in player_command.lower():
         Player.status_check()
     elif 'drop' in player_command.lower():
-            key_str = player_command[5:]
-            Player.inventory_check()
-            Player.current_location.items.append(player_command)
-            Player.inventory.remove(player_command)
+        key_str = player_command[5:]
+        Player.inventory_check()
+        Player.current_location.items.append(player_command)
+        Player.inventory.remove(player_command)
     elif 'equip' in player_command.lower():
         key_str = player_command[6:]
         item = None
@@ -439,7 +440,6 @@ while playing:
         if isinstance(item, Boots):
             Player.boots = item
             print("Equipped %s" % Player.boots.name)
-
     elif player_command.lower() in ['inventory', 'check inventory']:
         Player.inventory_check()
     elif player_command.lower() in ['q', 'quit', 'exit']:
