@@ -9,7 +9,6 @@ def first_num_is_four(num: str):
     return False
 
 
-
 def first_num_odd(num: str):
     first_num = int(old_number[0])
     if first_num % 2 == 1:
