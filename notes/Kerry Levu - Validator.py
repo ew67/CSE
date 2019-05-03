@@ -20,28 +20,52 @@ def reverse(num: str):
 
 def multi_odd_index(num: str):
     list_num = list(num)
-    print(list_num)
     current_index = -1
     for x in list_num:
         current_index = current_index + 1
-        print(current_index)
         if current_index % 2 == 1:
-            print("No")
+            pass
         elif current_index % 2 == 0:
             multiplied_value = int(x) * 2
             if multiplied_value > 9:
                 multiplied_value = multiplied_value - 9
             list_num.pop(current_index)
             list_num.insert(current_index, multiplied_value)
-        print(list_num)
+    for index in range(len(list_num)):
+        list_num[index] = int(list_num[index])
+    print(list_num)
     return list_num
 
+
+def sum_all(num: str):
+    total = (sum(num))
+    print(total)
+    return total
+
+
+def mod_10(num: str):
+    mod = num % 10
+    print(mod)
+    return mod
+
+def last_int_add(num: str):
+    last_dig = num[15]
+def mod_10_check(num: str):
+    if num % 10 == 0:
+        print("The credit card is valid!")
 
 def validate(num):
     digit_check(num)
     modified_num = drop_last_digit(num)
     reversed_num = reverse(modified_num)
-    multi_odd_index(reversed_num)
+    sum_num = multi_odd_index(reversed_num)
+    total = sum_all(sum_num)
+    mod_10(total)
+
+
+
+
+
 
 # with open("Book1.csv", 'r') as old_csv:
 #     with open("MyNewFile.csv", 'w', newline='') as new_csv:
@@ -56,4 +80,3 @@ def validate(num):
 
 
 validate("4556737586899855")
-
