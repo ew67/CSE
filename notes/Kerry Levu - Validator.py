@@ -8,9 +8,7 @@ def drop_last_digit(num: str):
 
 def digit_check(num: str):
     if len(num) == 16:
-        print("%s is a 16 digit number." % num)
         return True
-    print("%s is not a 16 digit number." % num)
     return False
 
 
@@ -24,7 +22,7 @@ def multi_odd_index(num: str):
     for x in list_num:
         current_index = current_index + 1
         if current_index % 2 == 1:
-            pass
+            pass    
         elif current_index % 2 == 0:
             multiplied_value = int(x) * 2
             if multiplied_value > 9:
@@ -33,26 +31,23 @@ def multi_odd_index(num: str):
             list_num.insert(current_index, multiplied_value)
     for index in range(len(list_num)):
         list_num[index] = int(list_num[index])
-    print(list_num)
     return list_num
 
 
-def sum_all(num: str):
+def sum_all(num: list):
     total = (sum(num))
-    print(total)
     return total
 
 
 def mod_10(num: str):
     mod = num % 10
-    print(mod)
     return mod
 
-def last_int_add(num: str):
-    last_dig = num[15]
-def mod_10_check(num: str):
-    if num % 10 == 0:
-        print("The credit card is valid!")
+
+def last_digit_return(num: str):
+    last_digit = num[15]
+    return last_digit
+
 
 def validate(num):
     digit_check(num)
@@ -61,22 +56,19 @@ def validate(num):
     sum_num = multi_odd_index(reversed_num)
     total = sum_all(sum_num)
     mod_10(total)
+    last_dig = int(last_digit_return(num))
+    if last_dig + total % 10 == 0:
+        return True
+    return False
 
 
-
-
-
-
-# with open("Book1.csv", 'r') as old_csv:
-#     with open("MyNewFile.csv", 'w', newline='') as new_csv:
-#         reader = csv.reader(old_csv)
-#         writer = csv.writer(new_csv)
-#         print("Processing...")
-#         for row in reader:
-#             old_number = row[0]  # String
-#             if validate(old_number):
-#                 writer.writerow(row)
-#         print("OK")
-
-
-validate("4556737586899855")
+with open("Book1.csv", 'r') as old_csv:
+    with open("MyNewFile.csv", 'w', newline='') as new_csv:
+        reader = csv.reader(old_csv)
+        writer = csv.writer(new_csv)
+        print("Processing...")
+        for row in reader:
+            old_number = row[0]  # String
+            if validate(old_number):
+                writer.writerow(row)
+        print("OK")
