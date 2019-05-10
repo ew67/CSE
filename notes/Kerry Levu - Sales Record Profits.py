@@ -32,10 +32,43 @@ with open("SalesRecords.csv", 'r') as old_csv:
                 max_profit.insert(1, profit)
                 max_profit.pop(0)
                 max_profit.insert(0, item_type)
-            print(max_profit)
-            if item_type not in item_type_list:
-                item_type_list.append(item_type)
-            print(item_type_list)
-            
+            # print(max_profit)
+            if 'Fruits' in item_type:
+                Fruit_profit.append(float(profit))
+                total = sum(Fruit_profit)
+                print(total)
+            if 'Clothes' in item_type:
+                Clothes_profit.append(float(profit))
+                total = sum(Clothes_profit)
+            if 'Meat' in item_type:
+                Meat_profit.append(profit)
+                total = sum(Meat_profit)
+            if 'Beverages' in item_type:
+                Beverages_profit.append(profit)
+                total = sum(Beverages_profit)
+            if 'Office Supplies' in item_type:
+                Office_profit.append(profit)
+                total = sum(Office_profit)
+            if 'Cosmetics' in item_type:
+                Cosmetics_profit.append(profit)
+                total = sum(Cosmetics_profit)
+            if 'Snacks' in item_type:
+                Snacks_profit.append(profit)
+                total = sum(Snacks_profit)
+            if 'Personal Care' in item_type:
+                Personal_profit.append(profit)
+                total = sum(Personal_profit)
+            if 'Household' in item_type:
+                Household_profit.append(profit)
+                total = sum(Household_profit)
+            if 'Vegetables' in item_type:
+                Vegetables_profit.append(profit)
+                total = sum(Vegetables_profit)
+            if 'Baby' in item_type:
+                Baby_profit.append(profit)
+                total = sum(Baby_profit)
+            if 'Cereal' in item_type:
+                Cereal_profit.append(profit)
+                total = sum(Cereal_profit)
         print("Done...")
 
