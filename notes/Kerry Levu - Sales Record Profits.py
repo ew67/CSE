@@ -12,7 +12,8 @@ Household_profit = []
 Vegetables_profit = []
 Baby_profit = []
 Cereal_profit = []
-
+item_type_strings = ['Fruit', 'Clothes', 'Beverages', 'Office', 'Cosmetics', 'Snacks',
+                     'Personal', 'Household', 'Vegetables', 'Baby', 'Cereal']
 with open("SalesRecords.csv", 'r') as old_csv:
     with open("SalesEdited.csv", 'w', newline='') as new_csv:
         print("Processing...")
@@ -20,8 +21,6 @@ with open("SalesRecords.csv", 'r') as old_csv:
         writer = csv.writer(new_csv)
         max_profit = [0, 0, 0]
         next(reader)
-        item_type_list = []
-
         for row in reader:
             region = row[0]
             item_type = row[2]
@@ -35,40 +34,44 @@ with open("SalesRecords.csv", 'r') as old_csv:
             # print(max_profit)
             if 'Fruits' in item_type:
                 Fruit_profit.append(float(profit))
-                total = sum(Fruit_profit)
-                print(total)
             if 'Clothes' in item_type:
                 Clothes_profit.append(float(profit))
-                total = sum(Clothes_profit)
             if 'Meat' in item_type:
-                Meat_profit.append(profit)
-                total = sum(Meat_profit)
+                Meat_profit.append(float(profit))
             if 'Beverages' in item_type:
-                Beverages_profit.append(profit)
-                total = sum(Beverages_profit)
+                Beverages_profit.append(float(profit))
             if 'Office Supplies' in item_type:
-                Office_profit.append(profit)
-                total = sum(Office_profit)
+                Office_profit.append(float(profit))
             if 'Cosmetics' in item_type:
-                Cosmetics_profit.append(profit)
-                total = sum(Cosmetics_profit)
+                Cosmetics_profit.append(float(profit))
             if 'Snacks' in item_type:
-                Snacks_profit.append(profit)
-                total = sum(Snacks_profit)
+                Snacks_profit.append(float(profit))
             if 'Personal Care' in item_type:
-                Personal_profit.append(profit)
-                total = sum(Personal_profit)
+                Personal_profit.append(float(profit))
             if 'Household' in item_type:
-                Household_profit.append(profit)
-                total = sum(Household_profit)
+                Household_profit.append(float(profit))
             if 'Vegetables' in item_type:
-                Vegetables_profit.append(profit)
-                total = sum(Vegetables_profit)
+                Vegetables_profit.append(float(profit))
             if 'Baby' in item_type:
-                Baby_profit.append(profit)
-                total = sum(Baby_profit)
+                Baby_profit.append(float(profit))
             if 'Cereal' in item_type:
-                Cereal_profit.append(profit)
-                total = sum(Cereal_profit)
+                Cereal_profit.append(float(profit))
+        Fruit_total = round(sum(Fruit_profit), 2)
+        Clothes_total = round(sum(Clothes_profit, 2))
+        Meat_total = round(sum(Meat_profit, 2))
+        Beverages_total = round(sum(Beverages_profit, 2))
+        Office_total = round(sum(Office_profit, 2))
+        Cosmetics_total = round(sum(Cosmetics_profit, 2))
+        Snacks_total = round(sum(Snacks_profit, 2))
+        Personal_total = round(sum(Personal_profit, 2))
+        Household_total = round(sum(Household_profit, 2))
+        Vegetables_total = round(sum(Vegetables_profit, 2))
+        Baby_total = round(sum(Baby_profit, 2))
+        Cereal_total = round(sum(Baby_profit, 2))
+        item_type_list = [Fruit_total, Clothes_total, Beverages_total, Office_total, Cosmetics_total, Snacks_total,
+                          Personal_total, Household_total, Vegetables_total, Baby_total, Cereal_total]
+        highest_total_profit = max(item_type_list)
+        index_of_highest_profit = item_type_list.index(highest_total_profit)
+        print("The highest profit is %s generating %f ")
         print("Done...")
 
