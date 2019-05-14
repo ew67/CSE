@@ -19,18 +19,18 @@ with open("SalesRecords.csv", 'r') as old_csv:
         print("Processing...")
         reader = csv.reader(old_csv)
         writer = csv.writer(new_csv)
-        max_profit = [0, 0, 0]
+        max_profit = [0, 0]
         next(reader)
         for row in reader:
             region = row[0]
             item_type = row[2]
             profit = row[13]
             # Finds Largest Single Order
-            if float(profit) > float(max_profit[1]):
-                max_profit.pop(1)
-                max_profit.insert(1, profit)
-                max_profit.pop(0)
-                max_profit.insert(0, item_type)
+            # if float(profit) > float(max_profit[1]):
+            #     max_profit.pop(1)
+            #     max_profit.insert(1, profit)
+            #     max_profit.pop(0)
+            #     max_profit.insert(0, item_type)
             # print(max_profit)
             if 'Fruits' in item_type:
                 Fruit_profit.append(float(profit))
@@ -72,6 +72,7 @@ with open("SalesRecords.csv", 'r') as old_csv:
                           Personal_total, Household_total, Vegetables_total, Baby_total, Cereal_total]
         highest_total_profit = max(item_type_list)
         index_of_highest_profit = item_type_list.index(highest_total_profit)
-        print("The highest profit is %s generating %f ")
+        print("The highest total profit is %s generating %d." % (item_type_strings[index_of_highest_profit],
+                                                                 highest_total_profit))
         print("Done...")
 
