@@ -331,6 +331,7 @@ while playing:
     # Item Check =======================================================================================================
     if len(Player.current_location.items) > 0:
         items_index = 0
+
         while items_index < len(Player.current_location.items):
             print()
             print("There is a %s in this room." % Player.current_location.items[items_index].name)
