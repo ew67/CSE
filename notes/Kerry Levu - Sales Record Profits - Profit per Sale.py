@@ -25,7 +25,6 @@ with open("SalesRecords.csv", 'r') as old_csv:
                 total_profit[item_type] += float(profit)
             else:
                 total_profit[item_type] = float(profit)
-        print(total_units_sold)
         highest_total_profit = max(total_units_sold, key=total_units_sold.get)
         print("The highest total profit is %s generating %f." % (highest_total_profit,
                                                                  max(total_units_sold.values())))
