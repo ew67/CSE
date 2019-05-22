@@ -31,15 +31,6 @@ with open("SalesRecords.csv", 'r') as old_csv:
                 profit_per_dict[key] += float(profit_per)
             else:
                 profit_per_dict[key] = float(profit_per)
-            print(profit_per)
-        print(profit_per_dict)
-        highest_profit_per = max(profit_per_dict, key=total_units_sold.get)
-        print("The highest profit per units sold is %s, %f" % (highest_profit_per, max(profit_per_dict.values())))
-        highest_sold = max(total_units_sold, key=total_units_sold.get)
-        highest_profit = max(total_profit, key=total_profit.get)
-        #
-        # print("The highest units sold is %s selling %f." % (highest_sold,
-        #                                                     max(total_units_sold.values())))
-        # print("The highest total profit is %s generating %f." % (highest_profit,
-        #                                                          max(total_profit.values())))
-        # print("Done...")
+        highest_profit_per = max(profit_per_dict, key=profit_per_dict.get)
+        print("The highest profit per units sold is %s, %f." % (highest_profit_per, max(profit_per_dict.values())))
+        print("Done...")

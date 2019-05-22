@@ -1,4 +1,6 @@
 import random
+import colorama
+from termcolor import colored
 
 
 class Room(object):
@@ -189,16 +191,18 @@ class Character(object):
         self.current_location = new_location
 
     def status_check(self):
-        try:
-            print("HP: %d " % self.health)
+        print("HP: %d " % self.health)
+        print(self.inventory_check())
+        if self.weapon is not None:
             print("Weapon: %s " % self.weapon.name)
-            print(self.inventory_check())
+        if self.helmet is not None:
             print("Helmet: %s" % self.helmet.name)
+        if self.chestplate is not None:
             print("Chestplate: %s" % self.chestplate.name)
+        if self.pants is not None:
             print("Pants: %s" % self.pants.name)
+        if self.boots is not None:
             print("Boots: %s" % self.boots.name)
-        except AttributeError:
-            print("%s" % 'None')
 
     def inventory_check(self):
         try:
@@ -303,7 +307,7 @@ LILIE_ROOM = Room("Lilie's Room", None, 'UPSTAIRS_HALLWAY_NORTH', None, None, No
 KENNY_ROOM = Room("Kenny's Room", None, None, 'UPSTAIRS_HALLWAY_CONT', None, None, None, "The room has a foul stench.",
                   [], [RPG])
 # Player ===============================================================================================================
-Player = Character('Paper', 100, Karyst, MAIN_DRIVEWAY, None, None, None, None)
+Player = Character('Paper', 100, None, MAIN_DRIVEWAY, None, None, None, None)
 # Controller ===========================================================================================================
 
 command_list = ['north', 'south', 'east', 'west', 'up', 'down']
@@ -326,8 +330,8 @@ while playing:
             print("You may play the game.")
     # Location Check ===================================================================================================
     print()
-    print(Player.current_location.name)
-    print(Player.current_location.description)
+    print(colored(Player.current_location.name, 'green'))
+    print(colored(Player.current_location.description, 'cyan'))
     # Item Check =======================================================================================================
     if len(Player.current_location.items) > 0:
         items_index = 0
@@ -364,9 +368,16 @@ while playing:
                 print()
                 if choice in command_list:
                     print("There's still a Monster in the room!")
+                if Player.weapon is None:
+                    print("You don't have a weapon!")
+
+                    continue
                 elif choice.lower() in ['yes']:
                     print("You've decided to fight the monster!")
                     print()
+                    if Player.weapon is None:
+                        print("You don't have a weapon!")
+                        continue
                     for x in Player.current_location.character:
                         Player.attack(x)
                         print()
@@ -398,6 +409,11 @@ while playing:
                         print()
                         print(Player.current_location.name)
                         print(Player.current_location.description)
+    # Death Food Check =================================================================================================
+    if Death_Food in Player.inventory:
+        print("You've died from eating the poisoned food.")
+        Player.health = 0
+        playing = False
     # Movement & Command Input =========================================================================================
     player_command = input(">_")
     if player_command.lower() in short_directions:
@@ -451,8 +467,8 @@ while playing:
             room_object = globals()[room_name]
             Player.move(room_object)
         except AttributeError:
-            print("I can't go that way.")
+            print(colored("I can't go that way.", 'red'))
         except KeyError:
-            print("This key does not exist.")
+            print(colored("This key does not exist.", 'red'))
     else:
-        print("Command Not Recognized.")
+        print(colored("Command Not Recognized", 'red'))
