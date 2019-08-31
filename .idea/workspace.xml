@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23578c4c-8bcb-463b-a297-6c6f002d9fcd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notes/World Map OOP.py" beforeDir="false" afterPath="$PROJECT_DIR$/notes/Kerry Levu - World Map OOP.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py" beforeDir="false" afterPath="$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notes/World Map OOP.py" beforeDir="false" afterPath="$PROJECT_DIR$/notes/World Map OOP.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
+            <state relative-caret-position="437">
+              <caret line="132" column="29" lean-forward="true" selection-start-line="132" selection-start-column="29" selection-end-line="132" selection-end-column="29" />
               <folding>
                 <element signature="e#35#259#0" />
                 <element signature="e#281#473#0" />
@@ -34,6 +36,7 @@
                 <element signature="e#5266#5383#0" />
                 <element signature="e#5479#5643#0" />
                 <element signature="e#5903#6189#0" />
+                <element signature="e#6216#6357#0" />
                 <element signature="e#6459#6573#0" />
                 <element signature="e#6655#6820#0" />
               </folding>
@@ -42,10 +45,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/notes/Kerry Levu - World Map OOP.py">
+        <entry file="file://$PROJECT_DIR$/notes/World Map OOP.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="103" lean-forward="true" selection-start-line="103" selection-end-line="103" />
+            <state relative-caret-position="408">
+              <caret line="74" column="115" lean-forward="true" selection-start-line="74" selection-start-column="115" selection-end-line="74" selection-end-column="115" />
             </state>
           </provider>
         </entry>
@@ -58,8 +61,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py" />
         <option value="$PROJECT_DIR$/notes/World Map OOP.py" />
+        <option value="$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py" />
       </list>
     </option>
   </component>
@@ -163,12 +166,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2528978" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2528978" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -199,8 +202,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/notes/Kerry Levu - Dictionary World Map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="240" lean-forward="true" selection-start-line="240" selection-end-line="240" />
+        <state relative-caret-position="437">
+          <caret line="132" column="29" lean-forward="true" selection-start-line="132" selection-start-column="29" selection-end-line="132" selection-end-column="29" />
           <folding>
             <element signature="e#35#259#0" />
             <element signature="e#281#473#0" />
@@ -217,16 +220,17 @@
             <element signature="e#5266#5383#0" />
             <element signature="e#5479#5643#0" />
             <element signature="e#5903#6189#0" />
+            <element signature="e#6216#6357#0" />
             <element signature="e#6459#6573#0" />
             <element signature="e#6655#6820#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes/Kerry Levu - World Map OOP.py">
+    <entry file="file://$PROJECT_DIR$/notes/World Map OOP.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="103" lean-forward="true" selection-start-line="103" selection-end-line="103" />
+        <state relative-caret-position="408">
+          <caret line="74" column="115" lean-forward="true" selection-start-line="74" selection-start-column="115" selection-end-line="74" selection-end-column="115" />
         </state>
       </provider>
     </entry>
