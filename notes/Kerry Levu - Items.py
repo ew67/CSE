@@ -100,30 +100,6 @@ class Shield(Melee):
                   "You die.")
 
 
-class Ranged(Weapon):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range):
-        super(Ranged, self).__init__(name, value, damage, element, role, material)
-        self.ammo_type = ammo_type
-        self.weapon_range = weapon_range
-
-
-class Bow(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range):
-        super(Bow, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-
-
-class Gun(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, magazine):
-        super(Gun, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-        self.magazine = magazine
-
-
-class RocketLauncher(Ranged):
-    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, explosion_range):
-        super(RocketLauncher, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range)
-        self.explosion_range = explosion_range
-
-
 class Sword(Melee):
     def __init__(self, name, value, damage, element, role, material, sword_type, handedness):
         super(Sword, self).__init__(name, value, damage, element, role, material, handedness)
@@ -141,3 +117,73 @@ class Whip(Melee):
         self.range = whip_range
 
 
+class Dagger(Melee):
+    def __init__(self, name, value, damage, element, role, material, chance_bleed):
+        super(Dagger, self).__init__(name, value, damage, element, role, material, handedness=False)
+        self.chance_bleed = chance_bleed
+
+    @staticmethod
+    def stab():
+        chance = random.randint(0, 1)
+        if chance == 1:
+            print("You gave them a present from the back.")
+        else:
+            print("Your Note 8 lights up, and gives your position away. You try to turn it off, but an arrow "
+                  "comes by and cracks the screen. You die.")
+
+
+class Ranged(Weapon):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate):
+        super(Ranged, self).__init__(name, value, damage, element, role, material)
+        self.ammo_type = ammo_type
+        self.weapon_range = weapon_range
+        self.fire_rate = fire_rate
+
+
+class Throwables(Ranged):
+    def __init__(self, name, value, damage, material, weapon_range, fire_rate):
+        super(Throwables, self).__init__(name, value, damage, None, None, material, None, weapon_range, fire_rate)
+
+
+class Bow(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate):
+        super(Bow, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate)
+
+
+class Gun(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, magazine, fire_rate):
+        super(Gun, self).__init__(name, value, damage, element, role, material, ammo_type, weapon_range, fire_rate)
+        self.magazine = magazine
+
+
+class RocketLauncher(Ranged):
+    def __init__(self, name, value, damage, element, role, material, ammo_type, weapon_range, explosion_range,
+                 fire_rate):
+        super(RocketLauncher, self).__init__(name, value, damage, element, role, material, ammo_type,
+                                             weapon_range, fire_rate)
+        self.explosion_range = explosion_range
+
+
+class Magic(Ranged):
+    def __init__(self, name, value, damage, element, role, material, weapon_range, fire_rate, mana, projectile):
+        super(Magic, self).__init__(name, value, damage, element, role, material, None, weapon_range, fire_rate)
+        self.mana_cost = mana
+        self.projectile = projectile
+
+
+Meteor_Rod = Magic("Meteor Rod", 1000, 24, "Earth", "Mage", "Moon_Rock", 3, 2, 5, "Meteor")
+RPG = RocketLauncher("RPG", 1000, 50, "Fire", "Demo", "Iron", "Rockets", 3, 2, .5)
+Zeus = Gun("Zeus", 50, 12, "Electricity", "Ranged", "Iron", "Electric_Bullet", 5, 30, 5)
+V_Power = Bow("rewoP_V", 3000, 67, None, "Ranged", "Wood", "Arrows", 6, 1)
+Caltrops = Throwables("Spikes", 50, 5, "Iron", 1, 5)
+Karyst = Dagger("Karyst", 1500, 34, "Toxin", "Assassin", "Moon_Rock", 35)
+Matterbul = Whip("Materbul", 1700, 43, None, None, "Leather", 8)
+Maciella = Mace("Maciella", 2500, 70, None, None, "Cobalt", 2)
+Repulsor = Sword("Repulsor", 5000, 167, None, "Knight", "Dark Steel", "Longsword", 1)
+Stanford = Shield("Stanford", 15, None, "Knight", "Tin", 500, 10)
+Health_Potion = Potions("Health Pot", 50, "1", 50, 10)
+Cake = Food("Cake", 100, 5, "Well Fed")
+Wood_Helmet = Helmet("Wood Helmet", 250, 25, "Wood")
+Iron_Chest = ChestPlate("Iron_Chest", 600, 100, "Iron")
+Gold_Leggings = Leggings("Gold Leggings", 500, 75, "Gold")
+Diamond_Slides = Boots("Diamond Slides", 1500, 1500, "Diamond")
